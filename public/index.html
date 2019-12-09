@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" data-framework="jquery">
+	<head>
+		<meta charset="utf-8">
+		<title>Toodoo Sample GUI</title>
+		<link rel="stylesheet" href="../node_modules/todomvc-common/base.css">
+		<link rel="stylesheet" href="../node_modules/todomvc-app-css/index.css">
+		<link rel="stylesheet" href="styles/app.css">
+	</head>
+	<body>
+		<section class="todoapp">
+			<header class="header">
+				<h1>Toodoo</h1>
+				<p class="intro">
+					Enter the invitees and submit the form to create a new todo list. All participants will receive an
+					email with a unique link pointing to the new todo list.
+				</p>
+			</header>
+			<form id="todo-list-form">
+				<section class="main">
+					<div>
+						<input type="text"
+						       id="todo-list-name"
+						       class="form-control"
+						       placeholder="Todo List Name"
+						       required>
+					</div>
+					
+					<div id="participants-list">
+						<!-- Dynamic Content -->
+					</div>
+				</section>
+				<footer class="footer">
+					<button type="submit" class="btn">Create</button>
+				</footer>
+			</form>
+		</section>
+		
+		<footer class="info">
+			<p>Based on the TodoMVC Project</p>
+			<p>Originally created by Sindre Sorhus</p>
+			<p>Part of TodoMVC</p>
+		</footer>
+		
+		<script src="../node_modules/todomvc-common/base.js"></script>
+		<script src="../node_modules/jquery/dist/jquery.js"></script>
+		<script src="scripts/index.js"></script>
+	</body>
+</html>

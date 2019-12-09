@@ -1,0 +1,11 @@
+version: '2'
+services:
+  php:
+    build:
+        context: ./php
+        dockerfile: Dockerfile
+    volumes:
+      - "../:/srv/app"
+    working_dir: "/srv/app"
+    environment:
+      PHP_IDE_CONFIG: "serverName=APP"
