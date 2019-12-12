@@ -88,12 +88,29 @@ class TodoList
      */
     public function getItemById(string $itemId): TodoListItem
     {
-        foreach ($this->getItems() as &$listItem) {
+        foreach ($this->items as &$listItem) {
             if ($listItem->getId()) {
                 return $listItem;
             }
         }
 
         throw new NotFoundException('ToDo List Item', $itemId);
+    }
+
+    /**
+     * @param bool $completed
+     *
+     * @return TodoList
+     */
+    public function applyNewStatusToAllItems(bool $completed): self
+    {
+        array_walk(
+            $this->items,
+            function (TodoListItem $listItem) use ($completed) {
+                $listItem->setCompleted($completed);
+            }
+        );
+
+        return $this;
     }
 }
