@@ -89,7 +89,7 @@ class TodoList
     public function getItemById(string $itemId): TodoListItem
     {
         foreach ($this->items as &$listItem) {
-            if ($listItem->getId()) {
+            if ($listItem->getId() === $itemId) {
                 return $listItem;
             }
         }
@@ -112,5 +112,21 @@ class TodoList
         );
 
         return $this;
+    }
+
+    /**
+     * @param string $itemId
+     *
+     * @return TodoList
+     */
+    public function deleteItemById(string $itemId): self
+    {
+        foreach ($this->items as $key => $listItem) {
+            if ($listItem->getId() === $itemId) {
+                unset($this->items[$key]);
+            }
+        }
+
+        throw new NotFoundException('ToDo List Item', $itemId);
     }
 }
