@@ -2,25 +2,15 @@
 
 namespace App\Application\UseCases;
 
-use App\Application\TodoListRepositoryInterface;
+use App\Application\Repository\TodoListRepositoryAwareInterface;
+use App\Application\Repository\TodoListRepositoryAwareTrait;
 
 /**
  * Class TodoListCreateCommandHandler
  */
-class TodoListCreateCommandHandler
+class TodoListCreateCommandHandler implements TodoListRepositoryAwareInterface
 {
-    /**
-     * @var TodoListRepositoryInterface
-     */
-    private $todoListRepository;
-
-    /**
-     * @param TodoListRepositoryInterface $todoListRepository
-     */
-    public function __construct(TodoListRepositoryInterface $todoListRepository)
-    {
-        $this->todoListRepository = $todoListRepository;
-    }
+    use TodoListRepositoryAwareTrait;
 
     /**
      * @param TodoListCreateCommand $command

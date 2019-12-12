@@ -2,7 +2,7 @@
 
 namespace Test\Application\UseCases;
 
-use App\Application\TodoListRepositoryInterface;
+use App\Application\Repository\TodoListRepositoryInterface;
 use App\Application\UseCases\TodoListCreateCommand;
 use App\Application\UseCases\TodoListCreateCommandHandler;
 use App\Domain\TodoList;
@@ -21,7 +21,8 @@ class TodoListCreateCommandHandlerTest extends TestCase
         $repository = $this->createMock(TodoListRepositoryInterface::class);
         $repository->expects($this->once())->method('addNew')->with($todoList);
 
-        $handler = new TodoListCreateCommandHandler($repository);
+        $handler = new TodoListCreateCommandHandler();
+        $handler->setTodoListRepository($repository);
         $this->assertEquals('some-id', $handler->handle($command));
     }
 }
