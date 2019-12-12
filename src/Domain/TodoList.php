@@ -23,6 +23,11 @@ class TodoList
     private $participantEmails = [];
 
     /**
+     * @var TodoListItem[]
+     */
+    private $items = [];
+
+    /**
      * @param string $email
      *
      * @return TodoList
@@ -52,5 +57,13 @@ class TodoList
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @return TodoListItem[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
     }
 }
