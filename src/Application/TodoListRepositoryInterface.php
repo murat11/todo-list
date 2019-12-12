@@ -15,4 +15,11 @@ interface TodoListRepositoryInterface
      * @param string $listId
      */
     public function deleteById(string $listId): void;
+
+    /**
+     * @param string $listId
+     *
+     * @return TodoList
+     */
+    public function findOneById(string $listId): TodoList;
 }
