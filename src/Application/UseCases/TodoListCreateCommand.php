@@ -2,6 +2,8 @@
 
 namespace App\Application\UseCases;
 
+use App\Domain\TodoList;
+
 /**
  * Class TodoListCreateCommand
  */
@@ -41,5 +43,19 @@ class TodoListCreateCommand
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return TodoList
+     */
+    public function buildTodoListInstance(): TodoList
+    {
+        $todoList = new TodoList();
+        $todoList->setName($this->name);
+        foreach ($this->participantEmails as $participantEmail) {
+            $todoList->addParticipantEmail($participantEmail);
+        }
+
+        return $todoList;
     }
 }
