@@ -12,6 +12,11 @@ interface TodoListRepositoryInterface
     public function addNew(TodoList $todoList): void;
 
     /**
+     * @param TodoList $todoList
+     */
+    public function save(TodoList $todoList): void;
+
+    /**
      * @param string $listId
      */
     public function deleteById(string $listId): void;

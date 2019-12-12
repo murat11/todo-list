@@ -2,6 +2,8 @@
 
 namespace App\Application\UseCases;
 
+use App\Domain\TodoListItem;
+
 /**
  * Class TodoListCreateItemCommand
  */
@@ -56,5 +58,17 @@ class TodoListCreateItemCommand
     public function isCompleted(): bool
     {
         return $this->completed;
+    }
+
+    /**
+     * @return TodoListItem
+     */
+    public function buildTodoListItem(): TodoListItem
+    {
+        $todoListItem = new TodoListItem();
+        $todoListItem->setTitle($this->getTitle());
+        $todoListItem->setCompleted($this->isCompleted());
+
+        return $todoListItem;
     }
 }

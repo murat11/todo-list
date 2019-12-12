@@ -46,5 +46,27 @@ class TodoListItem
         return $this->completed;
     }
 
+    /**
+     * @param string $title
+     *
+     * @return TodoListItem
+     */
+    public function setTitle(string $title): TodoListItem
+    {
+        $this->title = $title;
 
+        return $this;
+    }
+
+    /**
+     * @param bool $completed
+     *
+     * @return TodoListItem
+     */
+    public function setCompleted(bool $completed): TodoListItem
+    {
+        $this->completed = $completed;
+
+        return $this;
+    }
 }
