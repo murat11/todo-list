@@ -124,9 +124,22 @@ class TodoList
         foreach ($this->items as $key => $listItem) {
             if ($listItem->getId() === $itemId) {
                 unset($this->items[$key]);
+
+                return $this;
             }
         }
 
         throw new NotFoundException('ToDo List Item', $itemId);
+    }
+
+    public function deleteCompletedItems(): self
+    {
+        foreach ($this->items as $key => $listItem) {
+            if ($listItem->isCompleted()) {
+                unset($this->items[$key]);
+            }
+        }
+
+        return $this;
     }
 }
