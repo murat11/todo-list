@@ -44,7 +44,7 @@ class TodoList
      *
      * @return TodoList
      */
-    public function setName(string $name): TodoList
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -65,5 +65,17 @@ class TodoList
     public function getItems(): array
     {
         return $this->items;
+    }
+
+    /**
+     * @param TodoListItem $item
+     *
+     * @return TodoList
+     */
+    public function addItem(TodoListItem $item): self
+    {
+        $this->items[] = $item;
+
+        return $this;
     }
 }
