@@ -2,6 +2,8 @@
 
 namespace App\Domain;
 
+use App\Domain\Exception\NotFoundException;
+
 /**
  * Class TodoList
  */
@@ -77,5 +79,21 @@ class TodoList
         $this->items[] = $item;
 
         return $this;
+    }
+
+    /**
+     * @param string $itemId
+     *
+     * @return TodoListItem
+     */
+    public function getItemById(string $itemId): TodoListItem
+    {
+        foreach ($this->getItems() as &$listItem) {
+            if ($listItem->getId()) {
+                return $listItem;
+            }
+        }
+
+        throw new NotFoundException('ToDo List Item', $itemId);
     }
 }
