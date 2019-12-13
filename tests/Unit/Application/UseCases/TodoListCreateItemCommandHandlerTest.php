@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Application\UseCases;
+namespace Test\Unit\Application\UseCases;
 
 use App\Application\Repository\TodoListRepositoryInterface;
 use App\Application\UseCases\TodoListCreateItemCommand;
