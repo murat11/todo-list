@@ -112,12 +112,18 @@ class DbalTodoListRepository implements TodoListRepositoryInterface
     public function findOneById(string $listId): TodoList
     {
         $mappingForId = self::MAPPING[TodoList::class]['id'];
+        $query = sprintf(
+            'SELECT * FROM %s WHERE %s = :idValue LIMIT 1',
+            $this->connection->quoteIdentifier(self::TABLE),
+            $this->connection->quoteIdentifier($mappingForId['column'])
+        );
         $st = $this->connection->executeQuery(
-            'SELECT * FROM :table WHERE :idColumn = :idValue LIMIT 1',
+            $query,
             [
-                'table' => $this->connection->quoteIdentifier(self::TABLE),
-                'idColumn' => $this->connection->quoteIdentifier($mappingForId['column']),
-                'idValue' => $this->connection->quote($listId, $mappingForId['column_type']),
+                'idValue' => $listId,
+            ],
+            [
+                'idValue' => $mappingForId['column_type']
             ]
         );
 
@@ -196,7 +202,12 @@ class DbalTodoListRepository implements TodoListRepositoryInterface
             $reflectionProperty = $reflectionClass->getProperty($propertyName);
             $reflectionProperty->setAccessible(true);
             $value = $row[$columnSettings['column']];
-            if (!empty($columnSettings['deserializer'])) {
+
+            if (!empty($value) && $columnSettings['column_type'] === Types::JSON) {
+                $value = json_decode($value, true);
+            }
+
+            if (!empty($value) && !empty($columnSettings['deserializer'])) {
                 $value = call_user_func([$this, $columnSettings['deserializer']], $value);
             }
             $reflectionProperty->setValue($entity, $value);

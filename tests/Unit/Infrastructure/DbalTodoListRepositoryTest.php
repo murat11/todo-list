@@ -133,22 +133,21 @@ class DbalTodoListRepositoryTest extends TestCase
             [
                 'id' => 'todo-list-id',
                 'name' => 'Todo List Name',
-                'participants' => [
-                    'email1',
-                    'email2',
-                ],
-                'items' => [
+                'participants' => '["email1", "email2"]',
+                'items' => json_encode(
                     [
-                        'id' => 'todo-list-item-id-1',
-                        'title' => 'Todo List Item Title 1',
-                        'is_completed' => true,
-                    ],
-                    [
-                        'id' => 'todo-list-item-id-2',
-                        'title' => 'Todo List Item Title 2',
-                        'is_completed' => false,
-                    ],
-                ]
+                        [
+                            'id' => 'todo-list-item-id-1',
+                            'title' => 'Todo List Item Title 1',
+                            'is_completed' => true,
+                        ],
+                        [
+                            'id' => 'todo-list-item-id-2',
+                            'title' => 'Todo List Item Title 2',
+                            'is_completed' => false,
+                        ],
+                    ]
+                )
             ]
         );
         $this->connection->method('quoteIdentifier')
@@ -165,11 +164,12 @@ class DbalTodoListRepositoryTest extends TestCase
             );
         $this->connection->expects($this->once())->method('executeQuery')
             ->with(
-                'SELECT * FROM :table WHERE :idColumn = :idValue LIMIT 1',
+                'SELECT * FROM `todo_list` WHERE `id` = :idValue LIMIT 1',
                 [
-                    'table' => '`todo_list`',
-                    'idColumn' => '`id`',
-                    'idValue' => "'todo-list-id'",
+                    'idValue' => "todo-list-id",
+                ],
+                [
+                    'idValue' => Types::STRING,
                 ]
             )->willReturn($statement);
 
