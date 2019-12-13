@@ -56,7 +56,7 @@ class TodoList
     /**
      * @return string
      */
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -141,5 +141,13 @@ class TodoList
         }
 
         return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getParticipantEmails(): array
+    {
+        return $this->participantEmails;
     }
 }
