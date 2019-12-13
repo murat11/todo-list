@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Infrastructure;
+namespace Test\Unit\Infrastructure;
 
 use App\Infrastructure\Repository\IdGenerator\UuidGenerator;
 use PHPUnit\Framework\TestCase;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Infrastructure;
+namespace Test\Unit\Infrastructure;
 
 use App\Domain\TodoList;
 use App\Domain\TodoListItem;
