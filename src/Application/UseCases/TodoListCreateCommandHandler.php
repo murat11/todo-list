@@ -4,6 +4,7 @@ namespace App\Application\UseCases;
 
 use App\Application\Repository\TodoListRepositoryAwareInterface;
 use App\Application\Repository\TodoListRepositoryAwareTrait;
+use App\Domain\TodoList;
 
 /**
  * Class TodoListCreateCommandHandler
@@ -15,14 +16,14 @@ class TodoListCreateCommandHandler implements TodoListRepositoryAwareInterface
     /**
      * @param TodoListCreateCommand $command
      *
-     * @return string ID of TodoList
+     * @return TodoList
      */
-    public function handle(TodoListCreateCommand $command): string
+    public function handle(TodoListCreateCommand $command): TodoList
     {
 
         $todoList = $command->buildTodoListInstance();
         $this->todoListRepository->addNew($todoList);
 
-        return $todoList->getId();
+        return $todoList;
     }
 }

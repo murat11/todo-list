@@ -13,7 +13,6 @@ class TodoListCreateCommandHandlerTest extends TestCase
     public function testHandleOk()
     {
         $todoList = $this->createMock(TodoList::class);
-        $todoList->expects($this->once())->method('getId')->willReturn('some-id');
 
         $command = $this->createMock(TodoListCreateCommand::class);
         $command->method('buildTodoListInstance')->willReturn($todoList);
@@ -23,6 +22,6 @@ class TodoListCreateCommandHandlerTest extends TestCase
 
         $handler = new TodoListCreateCommandHandler();
         $handler->setTodoListRepository($repository);
-        $this->assertEquals('some-id', $handler->handle($command));
+        $this->assertEquals($todoList, $handler->handle($command));
     }
 }

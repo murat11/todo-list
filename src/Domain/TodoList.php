@@ -150,4 +150,12 @@ class TodoList
     {
         return $this->participantEmails;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
 }
