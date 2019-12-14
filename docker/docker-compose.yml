@@ -1,11 +1,27 @@
 version: '2'
 services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - "../:/srv/app"
+      - "./nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+    labels:
+      name: "Web Server"
+    depends_on:
+      - php
+
   php:
     build:
         context: ./php
         dockerfile: Dockerfile
     volumes:
       - "../:/srv/app"
+    ports:
+      - "9000"
     working_dir: "/srv/app"
     environment:
       PHP_IDE_CONFIG: "serverName=APP"
