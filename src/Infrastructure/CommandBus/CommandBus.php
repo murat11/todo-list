@@ -10,14 +10,14 @@ class CommandBus
     /**
      * @var HandlerResolver
      */
-    private $handlerFactory;
+    private $handlerResolver;
 
     /**
-     * @param HandlerResolver $handlerFactory
+     * @param HandlerResolver $handlerResolver
      */
-    public function __construct(HandlerResolver $handlerFactory)
+    public function __construct(HandlerResolver $handlerResolver)
     {
-        $this->handlerFactory = $handlerFactory;
+        $this->handlerResolver = $handlerResolver;
     }
 
     /**
@@ -27,7 +27,7 @@ class CommandBus
      */
     public function handle($command)
     {
-        $handler = $this->handlerFactory->getHandlerForCommand($command);
+        $handler = $this->handlerResolver->getHandlerForCommand($command);
 
         return $handler->handle($command);
     }
