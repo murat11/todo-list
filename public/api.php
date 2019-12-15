@@ -6,6 +6,7 @@ use App\Infrastructure\Api\RequestHandlers\CreateTodoListItemRequestHandler;
 use App\Infrastructure\Api\RequestHandlers\CreateTodoListRequestHandler;
 use App\Infrastructure\Api\RequestHandlers\DeleteTodoListRequestHandler;
 use App\Infrastructure\Api\RequestHandlers\GetTodoListItemsRequestHandler;
+use App\Infrastructure\Api\RequestHandlers\UpdateTodoListItemRequestHandler;
 
 require '../vendor/autoload.php';
 require '../src/assemble.php';
@@ -14,6 +15,7 @@ $routing = [
     ['POST', 'api.php/lists', CreateTodoListRequestHandler::class],
     ['GET', 'api.php/lists/:list-id/todos', GetTodoListItemsRequestHandler::class],
     ['POST', 'api.php/lists/:list-id/todos', CreateTodoListItemRequestHandler::class],
+    ['PUT', 'api.php/lists/:list-id/todos/:item-id', UpdateTodoListItemRequestHandler::class],
     ['DELETE', 'api.php/lists/:list-id', DeleteTodoListRequestHandler::class],
 ];
 

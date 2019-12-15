@@ -32,12 +32,11 @@ class TodoListCreateItemCommandValidator implements ValidatorInterface
         return $data instanceof TodoListCreateItemCommand || $data instanceof TodoListItemUpdateCommand;
     }
 
-
     /**
-     * @param TodoListCreateItemCommand $data
+     * @param TodoListCreateItemCommand|TodoListItemUpdateCommand $data
      * @param ValidationResult $validationResult
      */
-    private function validateTitle(TodoListCreateItemCommand $data, ValidationResult $validationResult): void
+    private function validateTitle($data, ValidationResult $validationResult): void
     {
         $name = $data->getTitle();
         if (empty($name)) {
