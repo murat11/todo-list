@@ -30,7 +30,7 @@ class ApiResponse
      */
     private $body;
 
-    public function __construct(int $statusCode, array $body)
+    public function __construct(int $statusCode, array $body = null)
     {
         $this->statusCode = $statusCode;
         $this->body = $body;
@@ -64,6 +64,8 @@ class ApiResponse
     {
         header(sprintf('HTTP/1.1 %d %s', $this->statusCode,self::REASONS[$this->statusCode] ?? ''));
         header('Content-type: application/json; charset=utf-8');
-        echo json_encode($this->body, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        if (!empty($this->body)) {
+            echo json_encode($this->body, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        }
     }
 }
