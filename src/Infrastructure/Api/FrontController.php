@@ -4,6 +4,7 @@ namespace App\Infrastructure\Api;
 
 
 use App\Infrastructure\Api\Exceptions\ApiException;
+use App\Infrastructure\Api\Exceptions\BadRequestException;
 use App\Infrastructure\Api\Exceptions\NotFoundException;
 use Throwable;
 
@@ -58,6 +59,8 @@ class FrontController
 
         try {
             $response = $this->chooseRequestHandler($request)->handle($request);
+        } catch (BadRequestException $x) {
+            $response = new ApiResponse($x->getCode(), ['message' => $x->getMessage(), 'errors' => $x->getErrors()]);
         } catch (ApiException $x) {
             $response = new ApiResponse($x->getCode(), ['message' => $x->getMessage()]);
         } catch (Throwable $x) {
