@@ -3,7 +3,10 @@
 namespace App\Infrastructure\Api;
 
 use App\Application\Validator\ValidationException;
+use App\Domain\Exception\TodoListItemNotFoundException;
+use App\Domain\Exception\TodoListNotFoundException;
 use App\Infrastructure\Api\Exceptions\BadRequestException;
+use App\Infrastructure\Api\Exceptions\NotFoundException;
 use App\Infrastructure\CommandBus\CommandBus;
 use App\Infrastructure\CommandBus\CommandBusAwareInterface;
 use App\Infrastructure\Serializer\SerializerAwareInterface;
@@ -39,7 +42,10 @@ abstract class ApiRequestHandler implements CommandBusAwareInterface, Serializer
             $result = $this->commandBus->handle($command);
         } catch (ValidationException $x) {
             throw new BadRequestException($x->getValidationErrors(), $x);
+        } catch (TodoListNotFoundException|TodoListItemNotFoundException $x) {
+            throw new NotFoundException($x->getMessage());
         }
+
         if (!empty($result)) {
             $result = $this->serializer->serialize($result);
         }
