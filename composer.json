@@ -22,5 +22,11 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^8.4"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "mkdir var/",
+      "chmod 777 var/"
+    ]
   }
 }
