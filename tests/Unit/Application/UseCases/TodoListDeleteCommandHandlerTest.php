@@ -3,8 +3,8 @@
 namespace Test\Unit\Application\UseCases;
 
 use App\Application\Repository\TodoListRepositoryInterface;
-use App\Application\UseCases\TodoListDeleteCommand;
-use App\Application\UseCases\TodoListDeleteCommandHandler;
+use App\Application\UseCases\TodoListDelete\TodoListDeleteCommand;
+use App\Application\UseCases\TodoListDelete\TodoListDeleteCommandHandler;
 use PHPUnit\Framework\TestCase;
 
 class TodoListDeleteCommandHandlerTest extends TestCase

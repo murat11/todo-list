@@ -3,8 +3,8 @@
 namespace Test\Unit\Application\UseCases;
 
 use App\Application\Repository\TodoListRepositoryInterface;
-use App\Application\UseCases\TodoListItemUpdateCommand;
-use App\Application\UseCases\TodoListItemUpdateCommandHandler;
+use App\Application\UseCases\TodoListItemUpdate\TodoListItemUpdateCommand;
+use App\Application\UseCases\TodoListItemUpdate\TodoListItemUpdateCommandHandler;
 use App\Domain\TodoList;
 use App\Domain\TodoListItem;
 use PHPUnit\Framework\TestCase;

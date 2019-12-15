@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Application\UseCases;
+namespace App\Application\UseCases\TodoListItemDelete;
 
 /**
  * Class TodoListItemDeleteCommand

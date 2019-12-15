@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\Application\UseCases;
+namespace App\Application\UseCases\TodoListReadItems;
 
 /**
- * Class TodoListDeleteCommand
+ * Class TodoListReadItemsCommand
  */
-class TodoListDeleteCommand
+class TodoListReadItemsCommand
 {
     /**
      * @var string
