@@ -9,7 +9,7 @@ use App\Infrastructure\CommandBus\HandlerResolver;
 use App\Infrastructure\Repository\DbalTodoListRepository;
 use App\Infrastructure\Repository\IdGenerator\UuidGenerator;
 use App\Infrastructure\Serializer\ChainedSerializer;
-use App\Infrastructure\Validator\ChainedValidator;
+use App\Application\Validator\ChainedValidator;
 use Doctrine\DBAL\DriverManager;
 
 $commandBus = new CommandBus(

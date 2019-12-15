@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\Unit\Infrastructure\Validator;
+namespace Test\Unit\Application\Validator;
 
-use App\Infrastructure\Validator\ValidationResult;
+use App\Application\Validator\ValidationResult;
 use PHPUnit\Framework\TestCase;
 
 class ValidationResultTest extends TestCase

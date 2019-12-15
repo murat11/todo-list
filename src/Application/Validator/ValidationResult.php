@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\Validator;
+namespace App\Application\Validator;
 
 class ValidationResult
 {
