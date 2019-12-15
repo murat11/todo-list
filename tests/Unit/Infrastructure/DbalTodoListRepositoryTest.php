@@ -5,7 +5,7 @@ namespace Test\Unit\Infrastructure;
 use App\Domain\TodoList;
 use App\Domain\TodoListItem;
 use App\Infrastructure\Repository\DbalTodoListRepository;
-use App\Infrastructure\Repository\Exception\NotFoundException;
+use App\Domain\Exception\TodoListNotFoundException;
 use App\Infrastructure\Repository\IdGeneratorInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\ResultStatement;
@@ -191,7 +191,7 @@ class DbalTodoListRepositoryTest extends TestCase
         $statement->expects($this->once())->method('fetch')->willReturn(false);
         $this->connection->expects($this->once())->method('executeQuery')->willReturn($statement);
 
-        $this->expectException(NotFoundException::class);
+        $this->expectException(TodoListNotFoundException::class);
         $this->repository->findOneById('some-id');
     }
 
@@ -207,7 +207,7 @@ class DbalTodoListRepositoryTest extends TestCase
     {
         $this->connection->expects($this->once())->method('delete')->willReturn(0);
 
-        $this->expectException(NotFoundException::class);
+        $this->expectException(TodoListNotFoundException::class);
         $this->repository->deleteById('some-id');
     }
 

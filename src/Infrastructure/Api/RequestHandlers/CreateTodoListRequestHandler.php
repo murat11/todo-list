@@ -13,10 +13,8 @@ class CreateTodoListRequestHandler extends ApiRequestHandler
     {
         $arguments = $request->getArguments();
         $command = new TodoListCreateCommand($arguments['name'] ?? '', $arguments['participants'] ?? []);
+        $apiResponse = new ApiResponse(ApiResponse::STATUS_CODE_CREATED, $this->handleCommand($command));
 
-        return new ApiResponse(
-            ApiResponse::STATUS_CODE_CREATED,
-            $this->handleCommand($command)
-        );
+        return $apiResponse;
     }
 }

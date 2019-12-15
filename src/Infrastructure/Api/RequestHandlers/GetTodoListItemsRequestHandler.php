@@ -7,7 +7,7 @@ use App\Infrastructure\Api\ApiRequest;
 use App\Infrastructure\Api\ApiRequestHandler;
 use App\Infrastructure\Api\ApiResponse;
 use App\Infrastructure\Api\Exceptions\NotFoundException;
-use App\Infrastructure\Repository\Exception\NotFoundException as NotFoundRepositoryException;
+use App\Domain\Exception\TodoListNotFoundException as NotFoundRepositoryException;
 
 class GetTodoListItemsRequestHandler extends ApiRequestHandler
 {

@@ -2,7 +2,7 @@
 
 namespace App\Domain;
 
-use App\Domain\Exception\NotFoundException;
+use App\Domain\Exception\TodoListItemNotFoundException;
 
 /**
  * Class TodoList
@@ -94,7 +94,7 @@ class TodoList
             }
         }
 
-        throw new NotFoundException('ToDo List Item', $itemId);
+        throw new TodoListItemNotFoundException($itemId);
     }
 
     /**
@@ -129,7 +129,7 @@ class TodoList
             }
         }
 
-        throw new NotFoundException('ToDo List Item', $itemId);
+        throw new TodoListItemNotFoundException($itemId);
     }
 
     public function deleteCompletedItems(): self

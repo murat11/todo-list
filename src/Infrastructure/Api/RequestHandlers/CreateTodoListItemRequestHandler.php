@@ -6,8 +6,6 @@ use App\Application\UseCases\TodoListCreateItem\TodoListCreateItemCommand;
 use App\Infrastructure\Api\ApiRequest;
 use App\Infrastructure\Api\ApiRequestHandler;
 use App\Infrastructure\Api\ApiResponse;
-use App\Infrastructure\Api\Exceptions\NotFoundException;
-use App\Infrastructure\Repository\Exception\NotFoundException as NotFoundRepositoryException;
 
 class CreateTodoListItemRequestHandler extends ApiRequestHandler
 {
@@ -25,14 +23,7 @@ class CreateTodoListItemRequestHandler extends ApiRequestHandler
             $arguments['completed'] ?? false
         );
 
-        try {
-            $apiResponse = new ApiResponse(
-                ApiResponse::STATUS_CODE_CREATED,
-                $this->handleCommand($command)
-            );
-        } catch (NotFoundRepositoryException $x) {
-            throw new NotFoundException(sprintf('Todo List with ID %s not found', $command->getListId()));
-        }
+        $apiResponse = new ApiResponse(ApiResponse::STATUS_CODE_CREATED, $this->handleCommand($command));
 
         return $apiResponse;
     }

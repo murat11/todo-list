@@ -5,7 +5,7 @@ namespace App\Infrastructure\Repository;
 use App\Application\Repository\TodoListRepositoryInterface;
 use App\Domain\TodoList;
 use App\Domain\TodoListItem;
-use App\Infrastructure\Repository\Exception\NotFoundException;
+use App\Domain\Exception\TodoListNotFoundException;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\Types\Types;
@@ -100,7 +100,7 @@ class DbalTodoListRepository implements TodoListRepositoryInterface
         );
 
         if (!$result) {
-            throw new NotFoundException(self::TABLE, $listId);
+            throw new TodoListNotFoundException($listId);
         }
     }
 
@@ -129,7 +129,7 @@ class DbalTodoListRepository implements TodoListRepositoryInterface
 
         $row = $st->fetch(FetchMode::ASSOCIATIVE);
         if (empty($row)) {
-            throw new NotFoundException(self::TABLE, $listId);
+            throw new TodoListNotFoundException($listId);
         }
 
         $todoList = $this->unmap($row, TodoList::class);

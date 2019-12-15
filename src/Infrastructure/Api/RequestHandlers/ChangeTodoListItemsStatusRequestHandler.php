@@ -3,8 +3,6 @@
 namespace App\Infrastructure\Api\RequestHandlers;
 
 use App\Application\UseCases\TodoListChangeItemsStatus\TodoListChangeItemsStatusCommand;
-use App\Infrastructure\Api\Exceptions\NotFoundException;
-use App\Infrastructure\Repository\Exception\NotFoundException as NotFoundRepositoryException;
 use App\Infrastructure\Api\ApiRequest;
 use App\Infrastructure\Api\ApiRequestHandler;
 use App\Infrastructure\Api\ApiResponse;
@@ -18,16 +16,9 @@ class ChangeTodoListItemsStatusRequestHandler extends ApiRequestHandler
         if (!is_null($completed)) {
             $completed = (bool) $completed;
         }
-        $command = new TodoListChangeItemsStatusCommand($arguments['list-id'] ?? '', $completed);
 
-        try {
-            $apiResponse = new ApiResponse(
-                ApiResponse::STATUS_CODE_OK,
-                $this->handleCommand($command)
-            );
-        } catch (NotFoundRepositoryException $x) {
-            throw new NotFoundException(sprintf('Todo List with ID %s not found', $command->getListId()));
-        }
+        $command = new TodoListChangeItemsStatusCommand($arguments['list-id'] ?? '', $completed);
+        $apiResponse = new ApiResponse(ApiResponse::STATUS_CODE_OK, $this->handleCommand($command));
 
         return $apiResponse;
     }
