@@ -2,7 +2,6 @@
 
 namespace App\Infrastructure\Api;
 
-
 use App\Infrastructure\Api\Exceptions\ApiException;
 use App\Infrastructure\Api\Exceptions\BadRequestException;
 use App\Infrastructure\Api\Exceptions\NotFoundException;
@@ -16,22 +15,11 @@ class FrontController
     private $handlers = [];
 
     /**
-     * @param array $routing
-     * @param RequestHandlerFactory $requestHandlerFactory
-     *
      * @return FrontController
      */
-    public static function createInstance(array $routing, RequestHandlerFactory $requestHandlerFactory)
+    public static function createInstance()
     {
-        $frontController = new self();
-        foreach ($routing as list($method, $path, $handlerClassName)) {
-            $frontController->registerHandler(
-                $requestHandlerFactory->createRequestHandler($handlerClassName),
-                new ApiRequestMatcher($method, $path)
-            );
-        }
-
-        return $frontController;
+        return new self();
     }
 
     /**
