@@ -2,6 +2,8 @@
 
 namespace App\Infrastructure\Api;
 
+use App\Application\Validator\ValidationException;
+use App\Infrastructure\Api\Exceptions\BadRequestException;
 use App\Infrastructure\CommandBus\CommandBus;
 use App\Infrastructure\CommandBus\CommandBusAwareInterface;
 use App\Infrastructure\Serializer\SerializerAwareInterface;
@@ -25,6 +27,22 @@ abstract class ApiRequestHandler implements CommandBusAwareInterface, Serializer
      * @return ApiResponse
      */
     abstract function handle(ApiRequest $request): ApiResponse;
+
+    /**
+     * @param $command
+     *
+     * @return mixed
+     */
+    protected function handleCommand($command)
+    {
+        try {
+            $result = $this->commandBus->handle($command);
+        } catch (ValidationException $x) {
+            throw new BadRequestException($x->getValidationErrors(), $x);
+        }
+
+        return $this->serializer->serialize($result);
+    }
 
     /**
      * @param CommandBus $commandBus
