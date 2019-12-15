@@ -2,8 +2,8 @@
 
 namespace Test\Integration\UseCases;
 
-use App\Application\UseCases\TodoListCreateItemCommand;
-use App\Application\UseCases\TodoListCreateItemCommandHandler;
+use App\Application\UseCases\TodoListCreateItem\TodoListCreateItemCommand;
+use App\Application\UseCases\TodoListCreateItem\TodoListCreateItemCommandHandler;
 use Doctrine\DBAL\FetchMode;
 use Test\Integration\ApplicationTestCase;
 

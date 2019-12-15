@@ -3,8 +3,8 @@
 namespace Test\Unit\Application\UseCases;
 
 use App\Application\Repository\TodoListRepositoryInterface;
-use App\Application\UseCases\TodoListChangeItemsStatusCommand;
-use App\Application\UseCases\TodoListChangeItemsStatusCommandHandler;
+use App\Application\UseCases\TodoListChangeItemsStatus\TodoListChangeItemsStatusCommand;
+use App\Application\UseCases\TodoListChangeItemsStatus\TodoListChangeItemsStatusCommandHandler;
 use App\Domain\TodoList;
 use PHPUnit\Framework\TestCase;
 

@@ -1,26 +1,27 @@
 <?php declare(strict_types=1);
 
-namespace App\Application\UseCases;
+namespace App\Application\UseCases\TodoListItemUpdate;
 
 use App\Application\Repository\TodoListRepositoryAwareInterface;
 use App\Application\Repository\TodoListRepositoryAwareTrait;
 use App\Domain\TodoListItem;
 
-class TodoListCreateItemCommandHandler implements TodoListRepositoryAwareInterface
+class TodoListItemUpdateCommandHandler implements TodoListRepositoryAwareInterface
 {
     use TodoListRepositoryAwareTrait;
 
     /**
-     * @param TodoListCreateItemCommand $command
+     * @param TodoListItemUpdateCommand $command
      *
      * @return TodoListItem
      */
-    public function handle(TodoListCreateItemCommand $command): TodoListItem
+    public function handle(TodoListItemUpdateCommand $command): TodoListItem
     {
         $todoList = $this->todoListRepository->findOneById($command->getListId());
-        $todoListItem = $command->buildTodoListItem();
+        $todoListItem = $todoList->getItemById($command->getListItemId());
+        $todoListItem->setTitle($command->getTitle());
+        $todoListItem->setCompleted($command->isCompleted());
 
-        $todoList->addItem($todoListItem);
         $this->todoListRepository->save($todoList);
 
         return $todoListItem;
