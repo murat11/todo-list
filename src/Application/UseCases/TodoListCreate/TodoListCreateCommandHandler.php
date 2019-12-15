@@ -4,8 +4,8 @@ namespace App\Application\UseCases\TodoListCreate;
 
 use App\Application\Repository\TodoListRepositoryAwareInterface;
 use App\Application\Repository\TodoListRepositoryAwareTrait;
-use App\Domain\EventManager\EventManagerAwareInterface;
-use App\Domain\EventManager\EventManagerAwareTrait;
+use App\Application\EventManager\EventManagerAwareInterface;
+use App\Application\EventManager\EventManagerAwareTrait;
 use App\Domain\Events\TodoListCreatedEvent;
 use App\Domain\TodoList;
 
@@ -27,7 +27,9 @@ class TodoListCreateCommandHandler implements TodoListRepositoryAwareInterface, 
 
         $todoList = $command->buildTodoListInstance();
         $this->todoListRepository->addNew($todoList);
-        $this->eventManager->emitEvent(new TodoListCreatedEvent($todoList));
+        if (isset($this->eventManager)) {
+            $this->eventManager->emitEvent(new TodoListCreatedEvent($todoList));
+        }
 
         return $todoList;
     }
