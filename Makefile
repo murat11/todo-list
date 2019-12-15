@@ -13,7 +13,7 @@ integration-test:
 	$(COMPOSE) kill
 
 start:
-	$(COMPOSE) up -d mysql-test php
+	$(COMPOSE) up -d nginx
 
 stop:
 	$(COMPOSE) kill

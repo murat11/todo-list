@@ -13,6 +13,7 @@ services:
       name: "Web Server"
     depends_on:
       - php
+      - mysql-dev
 
   php:
     build:
@@ -26,12 +27,27 @@ services:
     environment:
       PHP_IDE_CONFIG: "serverName=APP"
 
+  mysql-dev:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    ports:
+      - "3307:3306"
+    labels:
+      name: "Dev Database"
+    volumes:
+      - "./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "./mysql/my.cnf:/etc/mysql/my.cnf:ro"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: app_dev
+
   mysql-test:
     build:
       context: ./mysql
       dockerfile: Dockerfile
     ports:
-      - "3306:3306"
+      - "3308:3306"
     labels:
       name: "Test Database"
     volumes:
@@ -40,3 +56,4 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
       MYSQL_DATABASE: app_test
+
