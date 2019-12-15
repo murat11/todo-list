@@ -2,6 +2,9 @@
 
 namespace App\Infrastructure\CommandBus;
 
+use App\Application\Validator\ValidationException;
+use App\Application\Validator\ValidatorInterface;
+
 /**
  * Class CommandBus
  */
@@ -13,11 +16,18 @@ class CommandBus
     private $handlerResolver;
 
     /**
-     * @param HandlerResolver $handlerResolver
+     * @var ValidatorInterface
      */
-    public function __construct(HandlerResolver $handlerResolver)
+    private $validator;
+
+    /**
+     * @param HandlerResolver $handlerResolver
+     * @param ValidatorInterface $validator
+     */
+    public function __construct(HandlerResolver $handlerResolver, ValidatorInterface $validator)
     {
         $this->handlerResolver = $handlerResolver;
+        $this->validator = $validator;
     }
 
     /**
@@ -27,8 +37,17 @@ class CommandBus
      */
     public function handle($command)
     {
+        $this->validateCommand($command);
         $handler = $this->handlerResolver->getHandlerForCommand($command);
 
         return $handler->handle($command);
+    }
+
+    private function validateCommand($command): void
+    {
+        $validationResult = $this->validator->validate($command);
+        if (!$validationResult->isValid()) {
+            throw ValidationException::fromValidatorResult($validationResult);
+        }
     }
 }
