@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use App\Application\UseCases\TodoListCreate\TodoListCreateCommandValidator;
+use App\Application\UseCases\TodoListCreateItem\TodoListCreateItemCommandValidator;
 use App\Infrastructure\Api\RequestHandlerFactory;
 use App\Infrastructure\Api\Serializer\TodoListItemSerializer;
 use App\Infrastructure\Api\Serializer\TodoListSerializer;
@@ -21,7 +22,8 @@ $commandBus = new CommandBus(
     ),
     new ChainedValidator(
         [
-            new TodoListCreateCommandValidator()
+            new TodoListCreateCommandValidator(),
+            new TodoListCreateItemCommandValidator(),
         ]
     )
 );
