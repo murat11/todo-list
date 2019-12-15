@@ -4,5 +4,8 @@ namespace App\Domain\EventManager;
 
 interface EventHandlerInterface
 {
-
+    /**
+     * @param DomainEventInterface $domainEvent
+     */
+    public function handleEvent(DomainEventInterface $domainEvent);
 }

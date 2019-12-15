@@ -9,7 +9,7 @@ interface EventManagerInterface
      *
      * @return EventManagerInterface
      */
-    public function emitEvent(DomainEventInterface $event): self;
+    public function emitEvent(DomainEventInterface $event);
 
     /**
      * @param string $eventName
@@ -17,5 +17,5 @@ interface EventManagerInterface
      *
      * @return EventManagerInterface
      */
-    public function subscribe(string $eventName, EventHandlerInterface $eventHandler): self;
+    public function subscribe(string $eventName, EventHandlerInterface $eventHandler);
 }

@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\EventManager;
+namespace App\Application\EventManager;
+
+use App\Domain\EventManager\EventManagerInterface;
 
 trait EventManagerAwareTrait
 {

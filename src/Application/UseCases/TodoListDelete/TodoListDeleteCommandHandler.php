@@ -2,12 +2,13 @@
 
 namespace App\Application\UseCases\TodoListDelete;
 
+use App\Application\EventManager\EventManagerAwareInterface;
 use App\Application\Repository\TodoListRepositoryAwareInterface;
 use App\Application\Repository\TodoListRepositoryAwareTrait;
-use App\Domain\EventManager\EventManagerAwareTrait;
+use App\Application\EventManager\EventManagerAwareTrait;
 use App\Domain\Events\TodoListDeletedEvent;
 
-class TodoListDeleteCommandHandler implements TodoListRepositoryAwareInterface
+class TodoListDeleteCommandHandler implements TodoListRepositoryAwareInterface, EventManagerAwareInterface
 {
     use TodoListRepositoryAwareTrait;
     use EventManagerAwareTrait;
@@ -20,6 +21,8 @@ class TodoListDeleteCommandHandler implements TodoListRepositoryAwareInterface
         $listId = $command->getListId();
         $todoList = $this->todoListRepository->findOneById($listId);
         $this->todoListRepository->deleteById($listId);
-        $this->eventManager->emitEvent(new TodoListDeletedEvent($todoList));
+        if (isset($this->eventManager)) {
+            $this->eventManager->emitEvent(new TodoListDeletedEvent($todoList));
+        }
     }
 }
