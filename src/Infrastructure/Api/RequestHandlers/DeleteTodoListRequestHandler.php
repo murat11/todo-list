@@ -3,9 +3,8 @@
 namespace App\Infrastructure\Api\RequestHandlers;
 
 use App\Application\UseCases\TodoListDelete\TodoListDeleteCommand;
-use App\Domain\Exception\NotFoundException as DomainNotFoundException;
 use App\Infrastructure\Api\Exceptions\NotFoundException;
-use App\Infrastructure\Repository\Exception\NotFoundException as RepositoryNotFoundException;
+use App\Infrastructure\Repository\Exception\NotFoundException as NotFoundRepositoryException;
 use App\Infrastructure\Api\ApiRequest;
 use App\Infrastructure\Api\ApiRequestHandler;
 use App\Infrastructure\Api\ApiResponse;
@@ -22,7 +21,7 @@ class DeleteTodoListRequestHandler extends ApiRequestHandler
                 ApiResponse::STATUS_CODE_OK,
                 $this->handleCommand($command)
             );
-        } catch (DomainNotFoundException|RepositoryNotFoundException $x) {
+        } catch (NotFoundRepositoryException $x) {
             throw new NotFoundException(sprintf('Todo List with ID %s not found', $command->getListId()));
         }
 
