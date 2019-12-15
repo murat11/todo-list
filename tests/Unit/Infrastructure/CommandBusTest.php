@@ -2,6 +2,8 @@
 
 namespace Test\Unit\Infrastructure;
 
+use App\Application\Validator\ValidationResult;
+use App\Application\Validator\ValidatorInterface;
 use App\Infrastructure\CommandBus\CommandBus;
 use App\Infrastructure\CommandBus\HandlerResolver;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +21,13 @@ class CommandBusTest extends TestCase
         $handlerResolver = $this->createMock(HandlerResolver::class);
         $handlerResolver->expects($this->once())->method('getHandlerForCommand')->with($command)->willReturn($testCommandHandler);
 
-        (new CommandBus($handlerResolver))->handle($command);
+        $validationResult = $this->createMock(ValidationResult::class);
+        $validationResult->method('isValid')->willReturn(true);
+
+        $validator = $this->createMock(ValidatorInterface::class);
+        $validator->expects($this->once())->method('validate')->with($command)->willReturn($validationResult);
+
+        (new CommandBus($handlerResolver, $validator))->handle($command);
     }
 }
 
