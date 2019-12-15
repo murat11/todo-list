@@ -38,6 +38,43 @@ class ApiRequest
     }
 
     /**
+     * @return ApiRequest
+     */
+    public static function fromGlobals(): self
+    {
+        $method = strtoupper($_SERVER['REQUEST_METHOD']);
+
+        $arguments = $_GET;
+        if (!empty($_POST)) {
+            $arguments = array_replace_recursive($arguments, $_POST);
+        }
+
+        $body = self::getParsedRequestBody();
+        if (!empty($body)) {
+            $arguments = array_replace_recursive($arguments, $body);
+        }
+
+        $requestUriParts = explode('?', $_SERVER['REQUEST_URI'], 2);
+        $path = $requestUriParts[0];
+
+        return new self($method, $path, $arguments);
+    }
+
+    /**
+     * @return false|mixed|string
+     */
+    private static function getParsedRequestBody()
+    {
+        $body = file_get_contents('php://input');
+        if (!empty($body)) {
+            $body = @json_decode($body, true);
+        }
+
+        return $body;
+    }
+
+
+    /**
      * @return string
      */
     public function getMethod(): string
