@@ -3,8 +3,8 @@
 namespace Test\Unit\Application\UseCases;
 
 use App\Application\Repository\TodoListRepositoryInterface;
-use App\Application\UseCases\TodoListCreateCommand;
-use App\Application\UseCases\TodoListCreateCommandHandler;
+use App\Application\UseCases\TodoListCreate\TodoListCreateCommand;
+use App\Application\UseCases\TodoListCreate\TodoListCreateCommandHandler;
 use App\Domain\TodoList;
 use PHPUnit\Framework\TestCase;
 

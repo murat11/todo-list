@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Api\RequestHandlers;
 
-use App\Application\UseCases\TodoListCreateCommand;
-use App\Application\Validator\ValidationException;
+use App\Application\UseCases\TodoListCreate\TodoListCreateCommand;
+use App\Infrastructure\Validator\ValidationException;
 use App\Infrastructure\Api\ApiRequest;
 use App\Infrastructure\Api\ApiRequestHandler;
 use App\Infrastructure\Api\ApiResponse;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use App\Application\UseCases\TodoListCreateCommandValidator;
+use App\Application\UseCases\TodoListCreate\TodoListCreateCommandValidator;
 use App\Infrastructure\Api\RequestHandlerFactory;
 use App\Infrastructure\Api\Serializer\TodoListItemSerializer;
 use App\Infrastructure\Api\Serializer\TodoListSerializer;

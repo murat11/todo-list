@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Application\UseCases;
 
-use App\Application\UseCases\TodoListCreateCommand;
-use App\Application\UseCases\TodoListCreateCommandValidator;
+use App\Application\UseCases\TodoListCreate\TodoListCreateCommand;
+use App\Application\UseCases\TodoListCreate\TodoListCreateCommandValidator;
 use PHPUnit\Framework\TestCase;
 
 class TodoListCreateItemCommandValidatorTest extends TestCase

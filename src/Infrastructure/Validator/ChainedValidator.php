@@ -2,9 +2,6 @@
 
 namespace App\Infrastructure\Validator;
 
-use App\Application\Validator\ValidationResult;
-use App\Application\Validator\ValidatorInterface;
-
 class ChainedValidator implements ValidatorInterface
 {
     /**
