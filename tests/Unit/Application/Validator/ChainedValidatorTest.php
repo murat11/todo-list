@@ -1,10 +1,10 @@
 <?php
 
-namespace Test\Unit\Infrastructure\Validator;
+namespace Test\Unit\Application\Validator;
 
-use App\Infrastructure\Validator\ValidationResult;
-use App\Infrastructure\Validator\ValidatorInterface;
-use App\Infrastructure\Validator\ChainedValidator;
+use App\Application\Validator\ValidationResult;
+use App\Application\Validator\ValidatorInterface;
+use App\Application\Validator\ChainedValidator;
 use PHPUnit\Framework\TestCase;
 
 class ChainedValidatorTest extends TestCase
