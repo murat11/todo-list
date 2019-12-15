@@ -21,7 +21,7 @@ class TodoListChangeItemsStatusCommand
      * @param string $listId
      * @param bool $completed
      */
-    public function __construct(string $listId, bool $completed)
+    public function __construct(string $listId, ?bool $completed)
     {
         $this->listId = $listId;
         $this->completed = $completed;
@@ -38,7 +38,7 @@ class TodoListChangeItemsStatusCommand
     /**
      * @return bool
      */
-    public function isCompleted(): bool
+    public function isCompleted(): ?bool
     {
         return $this->completed;
     }

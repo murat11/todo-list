@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use App\Application\UseCases\TodoListChangeItemsStatus\TodoListChangeItemsStatusCommandValidator;
 use App\Application\UseCases\TodoListCreate\TodoListCreateCommandValidator;
 use App\Application\UseCases\TodoListCreateItem\TodoListCreateItemCommandValidator;
 use App\Infrastructure\Api\RequestHandlerFactory;
@@ -24,6 +25,7 @@ $commandBus = new CommandBus(
         [
             new TodoListCreateCommandValidator(),
             new TodoListCreateItemCommandValidator(),
+            new TodoListChangeItemsStatusCommandValidator(),
         ]
     )
 );
