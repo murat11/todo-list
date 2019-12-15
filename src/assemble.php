@@ -20,7 +20,7 @@ use App\Infrastructure\Serializer\ChainedSerializer;
 use App\Application\Validator\ChainedValidator;
 use Doctrine\DBAL\DriverManager;
 
-$notificationSender = new FileSystemNotificationSender('../var/notifications.txt');
+$notificationSender = new FileSystemNotificationSender(realpath('..') . '/var/notifications.txt');
 
 $eventManager = new EventManager();
 $eventManager->subscribe(TodoListCreatedEvent::NAME, new TodoListCreatedNotificationSender($notificationSender));
