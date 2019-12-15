@@ -40,8 +40,11 @@ abstract class ApiRequestHandler implements CommandBusAwareInterface, Serializer
         } catch (ValidationException $x) {
             throw new BadRequestException($x->getValidationErrors(), $x);
         }
+        if (!empty($result)) {
+            $result = $this->serializer->serialize($result);
+        }
 
-        return $this->serializer->serialize($result);
+        return $result;
     }
 
     /**
