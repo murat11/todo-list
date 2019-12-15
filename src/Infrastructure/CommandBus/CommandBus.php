@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\CommandBus;
 
-use App\Application\Validator\ValidationException;
-use App\Application\Validator\ValidatorInterface;
+use App\Infrastructure\Validator\ValidationException;
+use App\Infrastructure\Validator\ValidatorInterface;
 
 /**
  * Class CommandBus
