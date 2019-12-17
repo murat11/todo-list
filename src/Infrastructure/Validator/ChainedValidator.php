@@ -1,6 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Application\Validator;
+namespace App\Infrastructure\Validator;
+
+use App\Application\Validator\ValidationResult;
+use App\Application\Validator\ValidatorInterface;
 
 class ChainedValidator implements ValidatorInterface
 {
