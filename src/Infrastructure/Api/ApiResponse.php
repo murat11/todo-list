@@ -64,8 +64,10 @@ class ApiResponse
     {
         header(sprintf('HTTP/1.1 %d %s', $this->statusCode,self::REASONS[$this->statusCode] ?? ''));
         header('Content-type: application/json; charset=utf-8');
-        if (is_array($this->body)) {
-            echo json_encode($this->body, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        if (empty($this->body)) {
+            echo '{}';
+            return;
         }
+        echo json_encode($this->body, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
     }
 }
