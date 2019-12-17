@@ -17,7 +17,7 @@ use App\Infrastructure\Notifications\FileSystemNotificationSender;
 use App\Infrastructure\Repository\DbalTodoListRepository;
 use App\Infrastructure\Repository\IdGenerator\UuidGenerator;
 use App\Infrastructure\Serializer\ChainedSerializer;
-use App\Application\Validator\ChainedValidator;
+use App\Infrastructure\Validator\ChainedValidator;
 use Doctrine\DBAL\DriverManager;
 
 $notificationSender = new FileSystemNotificationSender(realpath('..') . '/var/notifications.txt');
