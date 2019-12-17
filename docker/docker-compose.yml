@@ -1,5 +1,15 @@
 version: '2'
 services:
+  nodejs:
+    build:
+      context: ./nodejs
+      dockerfile: Dockerfile
+    volumes:
+      - "../public:/srv/app/public"
+    labels:
+      name: "Node JS"
+    working_dir: "/srv/app/public"
+
   nginx:
     build:
       context: ./nginx
