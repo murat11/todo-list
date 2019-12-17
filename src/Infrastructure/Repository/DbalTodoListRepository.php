@@ -228,6 +228,8 @@ class DbalTodoListRepository implements TodoListRepositoryInterface
         $result = [];
         foreach ($todoListItems as &$todoListItem) {
             $serializedItem = $this->map($todoListItem)['values'];
+
+            //generate list item id if it's empty
             if (empty($serializedItem[$mappingForId['column']])) {
                 $todoListItemId = $this->generateId();
                 $serializedItem[$mappingForId['column']] = $todoListItemId;

@@ -194,7 +194,7 @@ $(function() {
 			var list = util.getParam(location.search).list;
 			var url = 'api.php/lists/' + list + '/todos';
 			var data = {
-				id: util.uuid(),
+                //id: util.uuid(),
 				title: val,
 				completed: false
 			};
@@ -206,7 +206,8 @@ $(function() {
 				contentType: 'application/json',
 				dataType: 'json'
 			})
-				.done(function() {
+				.done(function(responseData) {
+                    data.id = responseData.id;
 					this.todos.push(data);
 					
 					$input.val('');
@@ -274,7 +275,7 @@ $(function() {
 			} else {
 				var list = util.getParam(location.search).list;
 				var $listItem = $el.closest('li');
-				var url = 'api.php/lists/' + list + '/todos/' + $listItem.data('id')
+				var url = 'api.php/lists/' + list + '/todos/' + $listItem.data('id');
 				var data = {
 					id: $listItem.data('id'),
 					title: val,
@@ -300,7 +301,7 @@ $(function() {
 		destroy: function(e) {
 			var $listItem = $(e.target).closest('li');
 			var list = util.getParam(location.search).list;
-			var url = 'api.php/lists/' + list + '/todos/' + $listItem.data('id')
+			var url = 'api.php/lists/' + list + '/todos/' + $listItem.data('id');
 			
 			$.ajax({
 				method: 'DELETE',
