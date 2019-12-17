@@ -2,6 +2,7 @@ export COMPOSE=docker-compose -f docker/docker-compose.yml
 
 build:
 	$(COMPOSE) build
+	$(COMPOSE) run --rm nodejs npm install
 	$(COMPOSE) run --rm php composer install
 
 unit-test:
