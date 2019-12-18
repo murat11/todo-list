@@ -2,12 +2,12 @@
 
 namespace App\Domain\TodoList\TodoListManager;
 
+use App\Domain\EventManager\EventManagerInterface;
 use App\Domain\RepositoryInterface;
 use App\Domain\TodoList\Events\TodoListCreatedEvent;
 use App\Domain\TodoList\Events\TodoListDeletedEvent;
 use App\Domain\TodoList\Exception\TodoListNotFoundException;
 use App\Domain\TodoList\TodoList;
-use App\Infrastructure\EventManager\EventManager;
 
 class TodoListManager
 {
@@ -17,16 +17,15 @@ class TodoListManager
     private $repository;
 
     /**
-     * @var EventManager
+     * @var EventManagerInterface
      */
     private $eventManager;
 
     /**
-     * TodoListManager constructor.
      * @param RepositoryInterface $repository
-     * @param EventManager $eventManager
+     * @param EventManagerInterface $eventManager
      */
-    public function __construct(RepositoryInterface $repository, EventManager $eventManager)
+    public function __construct(RepositoryInterface $repository, EventManagerInterface $eventManager)
     {
         $this->repository = $repository;
         $this->eventManager = $eventManager;
