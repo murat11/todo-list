@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-use App\Application\Notifications\TodoListCreatedNotificationSender;
-use App\Application\Notifications\TodoListDeletedNotificationSender;
+use App\Application\Domain\EventHandlers\TodoListCreatedEventHandler;
+use App\Application\Domain\EventHandlers\TodoListDeletedEventHandler;
 use App\Application\UseCases\TodoListChangeItemsStatus\TodoListChangeItemsStatusCommandValidator;
 use App\Application\UseCases\TodoListCreate\TodoListCreateCommandValidator;
 use App\Application\UseCases\TodoListCreateItem\TodoListCreateItemCommandValidator;
@@ -53,8 +53,8 @@ $notificationSender = new NotificationSender(
 );
 
 $eventManager = new EventManager();
-$eventManager->subscribe(TodoListCreatedEvent::NAME, new TodoListCreatedNotificationSender($notificationSender));
-$eventManager->subscribe(TodoListDeletedEvent::NAME, new TodoListDeletedNotificationSender($notificationSender));
+$eventManager->subscribe(TodoListCreatedEvent::NAME, new TodoListCreatedEventHandler($notificationSender));
+$eventManager->subscribe(TodoListDeletedEvent::NAME, new TodoListDeletedEventHandler($notificationSender));
 
 $commandBus = new CommandBus(
     new HandlerResolver(
