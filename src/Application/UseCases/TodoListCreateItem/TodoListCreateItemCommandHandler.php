@@ -2,13 +2,13 @@
 
 namespace App\Application\UseCases\TodoListCreateItem;
 
-use App\Application\Repository\TodoListRepositoryAwareInterface;
-use App\Application\Repository\TodoListRepositoryAwareTrait;
-use App\Domain\TodoListItem;
+use App\Domain\TodoList\TodoListItem;
+use App\Domain\TodoList\TodoListManager\TodoListManagerAwareInterface;
+use App\Domain\TodoList\TodoListManager\TodoListManagerAwareTrait;
 
-class TodoListCreateItemCommandHandler implements TodoListRepositoryAwareInterface
+class TodoListCreateItemCommandHandler implements TodoListManagerAwareInterface
 {
-    use TodoListRepositoryAwareTrait;
+    use TodoListManagerAwareTrait;
 
     /**
      * @param TodoListCreateItemCommand $command
@@ -17,11 +17,10 @@ class TodoListCreateItemCommandHandler implements TodoListRepositoryAwareInterfa
      */
     public function handle(TodoListCreateItemCommand $command): TodoListItem
     {
-        $todoList = $this->todoListRepository->findOneById($command->getListId());
+        $todoList = $this->todoListManager->findTodoListById($command->getListId());
         $todoListItem = $command->buildTodoListItem();
-
         $todoList->addItem($todoListItem);
-        $this->todoListRepository->save($todoList);
+        $this->todoListManager->updateTodoList($todoList);
 
         return $todoListItem;
     }

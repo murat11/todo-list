@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain;
+namespace App\Domain\TodoList;
 
 /**
  * Class TodoListItem

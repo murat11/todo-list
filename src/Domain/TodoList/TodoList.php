@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain;
+namespace App\Domain\TodoList;
 
-use App\Domain\Exception\TodoListItemNotFoundException;
+use App\Domain\TodoList\Exception\TodoListItemNotFoundException;
 
 /**
  * Class TodoList

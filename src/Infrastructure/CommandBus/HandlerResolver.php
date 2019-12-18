@@ -2,31 +2,22 @@
 
 namespace App\Infrastructure\CommandBus;
 
-use App\Application\Repository\TodoListRepositoryAwareInterface;
-use App\Application\Repository\TodoListRepositoryInterface;
-use App\Application\EventManager\EventManagerAwareInterface;
-use App\Domain\EventManager\EventManagerInterface;
+use App\Domain\TodoList\TodoListManager\TodoListManager;
+use App\Domain\TodoList\TodoListManager\TodoListManagerAwareInterface;
 
 class HandlerResolver
 {
     /**
-     * @var TodoListRepositoryInterface
+     * @var TodoListManager
      */
-    private $todoListRepository;
+    private $todoListManager;
 
     /**
-     * @var EventManagerInterface
+     * @param TodoListManager $todoListManager
      */
-    private $eventManager;
-
-    /**
-     * @param TodoListRepositoryInterface $todoListRepository
-     * @param EventManagerInterface $eventManager
-     */
-    public function __construct(TodoListRepositoryInterface $todoListRepository, EventManagerInterface $eventManager)
+    public function __construct(TodoListManager $todoListManager)
     {
-        $this->todoListRepository = $todoListRepository;
-        $this->eventManager = $eventManager;
+        $this->todoListManager = $todoListManager;
     }
 
     /**
@@ -40,11 +31,8 @@ class HandlerResolver
         $classOfTheCommandHandler = $classOfTheCommand.'Handler';
 
         $handler = new $classOfTheCommandHandler();
-        if ($handler instanceof TodoListRepositoryAwareInterface) {
-            $handler->setTodoListRepository($this->todoListRepository);
-        }
-        if ($handler instanceof EventManagerAwareInterface) {
-            $handler->setEventManager($this->eventManager);
+        if ($handler instanceof TodoListManagerAwareInterface) {
+            $handler->setTodoListManager($this->todoListManager);
         }
 
         return $handler;

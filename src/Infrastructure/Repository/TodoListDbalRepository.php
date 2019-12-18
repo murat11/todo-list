@@ -2,16 +2,15 @@
 
 namespace App\Infrastructure\Repository;
 
-use App\Application\Repository\TodoListRepositoryInterface;
-use App\Domain\TodoList;
-use App\Domain\TodoListItem;
-use App\Domain\Exception\TodoListNotFoundException;
+use App\Domain\RepositoryInterface;
+use App\Domain\TodoList\TodoList;
+use App\Domain\TodoList\TodoListItem;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\Types\Types;
 use ReflectionClass;
 
-class DbalTodoListRepository implements TodoListRepositoryInterface
+class TodoListDbalRepository implements RepositoryInterface
 {
     private const TABLE = 'todo_list';
 
@@ -55,25 +54,25 @@ class DbalTodoListRepository implements TodoListRepositoryInterface
     }
 
     /**
-     * @param TodoList $todoList
+     * @param TodoList $entity
      */
-    public function addNew(TodoList $todoList): void
+    public function addNew($entity): void
     {
         $id = $this->generateId();
-        $mappedInstance = $this->map($todoList);
+        $mappedInstance = $this->map($entity);
         $mappedInstance['values']['id'] = $id;
         $this->connection->insert(
             self::TABLE,
             $mappedInstance['values'],
             $mappedInstance['types']
         );
-        $this->setEntityId($todoList, $id);
+        $this->setEntityId($entity, $id);
     }
 
     /**
      * @param TodoList $todoList
      */
-    public function save(TodoList $todoList): void
+    public function save($todoList): void
     {
         $mappingForId = self::MAPPING[TodoList::class]['id'];
         $mappedInstance = $this->map($todoList);
@@ -93,15 +92,11 @@ class DbalTodoListRepository implements TodoListRepositoryInterface
     public function deleteById(string $listId): void
     {
         $mappingForId = self::MAPPING[TodoList::class]['id'];
-        $result = $this->connection->delete(
+        $this->connection->delete(
             self::TABLE,
             [$mappingForId['column'] => $listId],
             [$mappingForId['column'] => $mappingForId['column_type']]
         );
-
-        if (!$result) {
-            throw new TodoListNotFoundException($listId);
-        }
     }
 
     /**
@@ -109,7 +104,7 @@ class DbalTodoListRepository implements TodoListRepositoryInterface
      *
      * @return TodoList
      */
-    public function findOneById(string $listId): TodoList
+    public function findOneById(string $listId)
     {
         $mappingForId = self::MAPPING[TodoList::class]['id'];
         $query = sprintf(
@@ -129,7 +124,7 @@ class DbalTodoListRepository implements TodoListRepositoryInterface
 
         $row = $st->fetch(FetchMode::ASSOCIATIVE);
         if (empty($row)) {
-            throw new TodoListNotFoundException($listId);
+            return null;
         }
 
         $todoList = $this->unmap($row, TodoList::class);

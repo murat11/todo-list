@@ -2,24 +2,24 @@
 
 namespace App\Application\UseCases\TodoListItemDelete;
 
-use App\Application\Repository\TodoListRepositoryAwareInterface;
-use App\Application\Repository\TodoListRepositoryAwareTrait;
+use App\Domain\TodoList\TodoListManager\TodoListManagerAwareInterface;
+use App\Domain\TodoList\TodoListManager\TodoListManagerAwareTrait;
 
 /**
  * Class TodoListItemDeleteCommandHandler
  */
-class TodoListItemDeleteCommandHandler implements TodoListRepositoryAwareInterface
+class TodoListItemDeleteCommandHandler implements TodoListManagerAwareInterface
 {
-    use TodoListRepositoryAwareTrait;
+    use TodoListManagerAwareTrait;
 
     /**
      * @param TodoListItemDeleteCommand $command
      */
     public function handle(TodoListItemDeleteCommand $command): void
     {
-        $todoList = $this->todoListRepository->findOneById($command->getListId());
+        $todoList = $this->todoListManager->findTodoListById($command->getListId());
         $todoList->deleteItemById($command->getListItemId());
 
-        $this->todoListRepository->save($todoList);
+        $this->todoListManager->updateTodoList($todoList);
     }
 }

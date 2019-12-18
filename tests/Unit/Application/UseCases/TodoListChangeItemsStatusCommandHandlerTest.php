@@ -2,10 +2,10 @@
 
 namespace Test\Unit\Application\UseCases;
 
-use App\Application\Repository\TodoListRepositoryInterface;
 use App\Application\UseCases\TodoListChangeItemsStatus\TodoListChangeItemsStatusCommand;
 use App\Application\UseCases\TodoListChangeItemsStatus\TodoListChangeItemsStatusCommandHandler;
-use App\Domain\TodoList;
+use App\Domain\TodoList\TodoList;
+use App\Domain\TodoList\TodoListManager\TodoListManager;
 use PHPUnit\Framework\TestCase;
 
 class TodoListChangeItemsStatusCommandHandlerTest extends TestCase
@@ -19,12 +19,12 @@ class TodoListChangeItemsStatusCommandHandlerTest extends TestCase
         $todoList = $this->createMock(TodoList::class);
         $todoList->expects($this->once())->method('applyNewStatusToAllItems')->with(true);
 
-        $repository = $this->createMock(TodoListRepositoryInterface::class);
-        $repository->expects($this->once())->method('findOneById')->with('list-id')->willReturn($todoList);
-        $repository->expects($this->once())->method('save')->with($todoList);
+        $manager = $this->createMock(TodoListManager::class);
+        $manager->expects($this->once())->method('findTodoListById')->with('list-id')->willReturn($todoList);
+        $manager->expects($this->once())->method('updateTodoList')->with($todoList);
 
         $handler = new TodoListChangeItemsStatusCommandHandler();
-        $handler->setTodoListRepository($repository);
+        $handler->setTodoListManager($manager);
         $handler->handle($command);
     }
 }

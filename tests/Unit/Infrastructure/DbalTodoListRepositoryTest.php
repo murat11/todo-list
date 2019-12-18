@@ -2,10 +2,9 @@
 
 namespace Test\Unit\Infrastructure;
 
-use App\Domain\TodoList;
-use App\Domain\TodoListItem;
-use App\Infrastructure\Repository\DbalTodoListRepository;
-use App\Domain\Exception\TodoListNotFoundException;
+use App\Domain\TodoList\TodoList;
+use App\Domain\TodoList\TodoListItem;
+use App\Infrastructure\Repository\TodoListDbalRepository;
 use App\Infrastructure\Repository\IdGeneratorInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\ResultStatement;
@@ -23,7 +22,7 @@ class DbalTodoListRepositoryTest extends TestCase
     private $connection;
 
     /**
-     * @var DbalTodoListRepository
+     * @var TodoListDbalRepository
      */
     private $repository;
 
@@ -36,12 +35,12 @@ class DbalTodoListRepositoryTest extends TestCase
     {
         $this->connection = $this->createMock(Connection::class);
         $this->idGenerator = $this->createMock(IdGeneratorInterface::class);
-        $this->repository = new DbalTodoListRepository($this->connection, $this->idGenerator);
+        $this->repository = new TodoListDbalRepository($this->connection, $this->idGenerator);
     }
 
     public function testItIsInitialized()
     {
-        $this->assertInstanceOf(DbalTodoListRepository::class, $this->repository);
+        $this->assertInstanceOf(TodoListDbalRepository::class, $this->repository);
     }
 
     public function testAddNewTodoListOk()
@@ -191,8 +190,7 @@ class DbalTodoListRepositoryTest extends TestCase
         $statement->expects($this->once())->method('fetch')->willReturn(false);
         $this->connection->expects($this->once())->method('executeQuery')->willReturn($statement);
 
-        $this->expectException(TodoListNotFoundException::class);
-        $this->repository->findOneById('some-id');
+        $this->assertNull($this->repository->findOneById('some-id'));
     }
 
     public function testDeleteByIdOk()
@@ -201,14 +199,6 @@ class DbalTodoListRepositoryTest extends TestCase
             ->with('todo_list', ['id' => 'id-to-delete'], ['id' => Types::STRING])
             ->willReturn(1);
         $this->repository->deleteById('id-to-delete');
-    }
-
-    public function testDeleteByIdNotFound()
-    {
-        $this->connection->expects($this->once())->method('delete')->willReturn(0);
-
-        $this->expectException(TodoListNotFoundException::class);
-        $this->repository->deleteById('some-id');
     }
 
     /**

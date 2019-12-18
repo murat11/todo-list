@@ -2,7 +2,7 @@
 
 namespace Test\Integration;
 
-use App\Infrastructure\Repository\DbalTodoListRepository;
+use App\Infrastructure\Repository\TodoListDbalRepository;
 use App\Infrastructure\Repository\IdGenerator\UuidGenerator;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
@@ -16,7 +16,7 @@ abstract class ApplicationTestCase extends TestCase
     protected $connection;
 
     /**
-     * @var DbalTodoListRepository
+     * @var TodoListDbalRepository
      */
     protected $repository;
 
@@ -25,7 +25,7 @@ abstract class ApplicationTestCase extends TestCase
         parent::__construct($name, $data, $dataName);
 
         $this->connection = DriverManager::getConnection(['url' => 'mysql://root@mysql-test:3306/app_test']);
-        $this->repository = new DbalTodoListRepository($this->connection, new UuidGenerator());
+        $this->repository = new TodoListDbalRepository($this->connection, new UuidGenerator());
     }
 
     protected function setUp(): void

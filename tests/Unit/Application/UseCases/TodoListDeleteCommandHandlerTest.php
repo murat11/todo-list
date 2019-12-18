@@ -2,12 +2,10 @@
 
 namespace Test\Unit\Application\UseCases;
 
-use App\Application\Repository\TodoListRepositoryInterface;
 use App\Application\UseCases\TodoListDelete\TodoListDeleteCommand;
 use App\Application\UseCases\TodoListDelete\TodoListDeleteCommandHandler;
-use App\Domain\EventManager\EventManagerInterface;
-use App\Domain\Events\TodoListDeletedEvent;
-use App\Domain\TodoList;
+use App\Domain\TodoList\TodoList;
+use App\Domain\TodoList\TodoListManager\TodoListManager;
 use PHPUnit\Framework\TestCase;
 
 class TodoListDeleteCommandHandlerTest extends TestCase
@@ -19,16 +17,13 @@ class TodoListDeleteCommandHandlerTest extends TestCase
         $command = $this->createMock(TodoListDeleteCommand::class);
         $command->expects($this->once())->method('getListId')->willReturn('id-to-delete');
 
-        $repository = $this->createMock(TodoListRepositoryInterface::class);
-        $repository->expects($this->once())->method('deleteById')->with('id-to-delete');
-        $repository->expects($this->once())->method('findOneById')->with('id-to-delete')->willReturn($todoList);
+        $manager = $this->createMock(TodoListManager::class);
+        $manager->expects($this->once())->method('findTodoListById')->with('id-to-delete')->willReturn($todoList);
+        $manager->expects($this->once())->method('deleteTodoList')->with($todoList);
 
-        $eventManager = $this->createMock(EventManagerInterface::class);
-        $eventManager->expects($this->once())->method('emitEvent')->with(new TodoListDeletedEvent($todoList));
 
         $handler = new TodoListDeleteCommandHandler();
-        $handler->setTodoListRepository($repository);
-        $handler->setEventManager($eventManager);
+        $handler->setTodoListManager($manager);
         $handler->handle($command);
     }
 }

@@ -2,21 +2,22 @@
 
 namespace App\Application\UseCases\TodoListReadItems;
 
-use App\Application\Repository\TodoListRepositoryAwareInterface;
-use App\Application\Repository\TodoListRepositoryAwareTrait;
+use App\Domain\TodoList\TodoListItem;
+use App\Domain\TodoList\TodoListManager\TodoListManagerAwareInterface;
+use App\Domain\TodoList\TodoListManager\TodoListManagerAwareTrait;
 
-class TodoListReadItemsCommandHandler implements TodoListRepositoryAwareInterface
+class TodoListReadItemsCommandHandler implements TodoListManagerAwareInterface
 {
-    use TodoListRepositoryAwareTrait;
+    use TodoListManagerAwareTrait;
 
     /**
      * @param TodoListReadItemsCommand $command
      *
-     * @return array
+     * @return TodoListItem[]
      */
     public function handle(TodoListReadItemsCommand $command): array
     {
-        $todoList = $this->todoListRepository->findOneById($command->getListId());
+        $todoList = $this->todoListManager->findTodoListById($command->getListId());
 
         return $todoList->getItems();
     }

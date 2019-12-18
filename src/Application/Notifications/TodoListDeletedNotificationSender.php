@@ -4,7 +4,7 @@ namespace App\Application\Notifications;
 
 use App\Domain\EventManager\DomainEventInterface;
 use App\Domain\EventManager\EventHandlerInterface;
-use App\Domain\Events\TodoListDeletedEvent;
+use App\Domain\TodoList\Events\TodoListDeletedEvent;
 
 class TodoListDeletedNotificationSender implements EventHandlerInterface
 {
