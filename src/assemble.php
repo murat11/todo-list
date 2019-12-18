@@ -13,14 +13,43 @@ use App\Infrastructure\Api\Serializer\TodoListSerializer;
 use App\Infrastructure\CommandBus\CommandBus;
 use App\Infrastructure\CommandBus\HandlerResolver;
 use App\Infrastructure\EventManager\EventManager;
-use App\Infrastructure\Notifications\FileSystemNotificationSender;
+use App\Infrastructure\Notifications\NotificationSender;
 use App\Infrastructure\Repository\DbalTodoListRepository;
 use App\Infrastructure\Repository\IdGenerator\UuidGenerator;
 use App\Infrastructure\Serializer\ChainedSerializer;
+use App\Infrastructure\Uri\UrlBuilder;
 use App\Infrastructure\Validator\ChainedValidator;
 use Doctrine\DBAL\DriverManager;
+use Twig\Environment as Twig;
+use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
-$notificationSender = new FileSystemNotificationSender(realpath('..') . '/var/notifications.txt');
+$projectRoot = realpath('..');
+$twig = new Twig(
+    new FilesystemLoader($projectRoot.'/templates/email'),
+    ['cache' => false]
+);
+
+$frontendUrlBuilder = new UrlBuilder('http://localhost:8080');
+$twig->addFunction(
+    new TwigFunction(
+        'buildFrontendUrl',
+        function (string $path, array $parameters = null) use ($frontendUrlBuilder) {
+            return $frontendUrlBuilder->buildUrl($path, $parameters);
+        }
+    )
+);
+
+$notificationSender = new NotificationSender(
+    [
+        'host' => 'smtp.sendgrid.net',
+        'port' => 25,
+        'username' => 'apikey',
+        'password' => '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',
+        'fromEmail' => 'murat@narsana.ru',
+    ],
+    $twig
+);
 
 $eventManager = new EventManager();
 $eventManager->subscribe(TodoListCreatedEvent::NAME, new TodoListCreatedNotificationSender($notificationSender));

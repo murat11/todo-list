@@ -1,0 +1,17 @@
+{% block subject %}
+    New Todo List created: {{ todo_list.name | capitalize}}
+{% endblock %}
+
+{% block body_html %}
+    <h2>Congratulations</h2>
+    <p>
+        "{{ todo_list.name | capitalize }}" assigned to you.
+        <br />
+        Here is <a href="{{ buildFrontendUrl('todo.html', {'list': todo_list.id}) |raw }}">the link to new list</a>
+    </p>
+{% endblock %}
+
+{% block body_text %}
+    Congratulations. "{{ todo_list.name | capitalize }}" assigned to you.
+    Here is the link to new list: {{ buildFrontendUrl('todo.html', {'list': todo_list.id}) |raw }}
+{% endblock %}

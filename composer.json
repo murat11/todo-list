@@ -2,7 +2,9 @@
   "type": "project",
   "require": {
     "php": "^7.2",
-    "doctrine/dbal": "^2.10"
+    "doctrine/dbal": "^2.10",
+    "phpmailer/phpmailer": "^6.1",
+    "twig/twig": "^3.0"
   },
   "config": {
     "preferred-install": {
@@ -22,10 +24,5 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^8.4"
-  },
-  "scripts": {
-    "post-install-cmd": [
-      "mkdir -p var/ && chmod 777 var/"
-    ]
   }
 }

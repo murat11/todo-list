@@ -7,12 +7,12 @@ class Notification
     /**
      * @var string
      */
-    private $subject;
+    private $type;
 
     /**
-     * @var string
+     * @var array
      */
-    private $body;
+    private $properties;
 
     /**
      * @var array
@@ -21,30 +21,30 @@ class Notification
 
     /**
      * @param string[] $recipients
-     * @param string $subject
-     * @param string $body
+     * @param string $type
+     * @param array $properties
      */
-    public function __construct(array $recipients, string $subject, string $body)
+    public function __construct(array $recipients, string $type, array $properties)
     {
-        $this->subject = $subject;
-        $this->body = $body;
+        $this->type = $type;
+        $this->properties = $properties;
         $this->recipients = $recipients;
     }
 
     /**
      * @return string
      */
-    public function getSubject(): string
+    public function getType(): string
     {
-        return $this->subject;
+        return $this->type;
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getBody(): string
+    public function getProperties(): array
     {
-        return $this->body;
+        return $this->properties;
     }
 
     /**

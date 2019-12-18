@@ -1,0 +1,12 @@
+{% block subject %}
+    Todo List DELETED: {{ todo_list.name | capitalize }}
+{% endblock %}
+
+{% block body_html %}
+    <h4>Hello</h4>
+    <b>"{{ todo_list.name | capitalize }}" was deleted</b>
+{% endblock %}
+
+{% block body_text %}
+    Hello. "{{ todo_list.name | capitalize }}" was deleted
+{% endblock %}

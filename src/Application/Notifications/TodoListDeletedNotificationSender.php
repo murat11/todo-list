@@ -5,10 +5,10 @@ namespace App\Application\Notifications;
 use App\Domain\EventManager\DomainEventInterface;
 use App\Domain\EventManager\EventHandlerInterface;
 use App\Domain\Events\TodoListDeletedEvent;
-use App\Domain\TodoList;
 
 class TodoListDeletedNotificationSender implements EventHandlerInterface
 {
+
     /**
      * @var NotificationSenderInterface
      */
@@ -31,27 +31,14 @@ class TodoListDeletedNotificationSender implements EventHandlerInterface
             return;
         }
 
-        $notification = $this->createNotificationFromEvent($domainEvent->getTodoList());
-        if (!empty($notification)) {
-            $this->notifier->send($notification);
-        }
-    }
-
-    /**
-     * @param TodoList $todoList
-     *
-     * @return Notification
-     */
-    private function createNotificationFromEvent(TodoList $todoList): ?Notification
-    {
-        $participantEmails = $todoList->getParticipantEmails();
-        if (empty($participantEmails)) {
-            return null;
-        }
-
-        $body = $todoList->getName() . ' ' . $todoList->getId() . PHP_EOL;
-        $body .= json_encode($todoList->getItems());
-
-        return new Notification($participantEmails, 'Todo List DELETED', $body);
+        $todoList = $domainEvent->getTodoList();
+        $notification = new Notification(
+            $todoList->getParticipantEmails(),
+            TodoListDeletedEvent::NAME,
+            [
+                'todo_list' => $todoList,
+            ]
+        );
+        $this->notifier->send($notification);
     }
 }
