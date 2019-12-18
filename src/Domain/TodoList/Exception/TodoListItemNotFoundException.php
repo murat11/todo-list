@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Exception;
+namespace App\Domain\TodoList\Exception;
 
 use InvalidArgumentException;
 use Throwable;

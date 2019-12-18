@@ -2,10 +2,10 @@
 
 namespace Test\Unit\Application\UseCases;
 
-use App\Application\Repository\TodoListRepositoryInterface;
 use App\Application\UseCases\TodoListReadItems\TodoListReadItemsCommand;
 use App\Application\UseCases\TodoListReadItems\TodoListReadItemsCommandHandler;
-use App\Domain\TodoList;
+use App\Domain\TodoList\TodoList;
+use App\Domain\TodoList\TodoListManager\TodoListManager;
 use PHPUnit\Framework\TestCase;
 
 class TodoListReadItemsCommandHandlerTest extends TestCase
@@ -15,14 +15,14 @@ class TodoListReadItemsCommandHandlerTest extends TestCase
         $todoList = $this->createMock(TodoList::class);
         $todoList->expects($this->once())->method('getItems')->willReturn(['list-of-todo-items']);
 
-        $repository = $this->createMock(TodoListRepositoryInterface::class);
-        $repository->expects($this->once())->method('findOneById')->with('list-id')->willReturn($todoList);
-
         $command = $this->createMock(TodoListReadItemsCommand::class);
         $command->expects($this->once())->method('getListId')->willReturn('list-id');
 
+        $manager = $this->createMock(TodoListManager::class);
+        $manager->expects($this->once())->method('findTodoListById')->with('list-id')->willReturn($todoList);
+
         $handler = new TodoListReadItemsCommandHandler();
-        $handler->setTodoListRepository($repository);
+        $handler->setTodoListManager($manager);
         $this->assertEquals(['list-of-todo-items'], $handler->handle($command));
     }
 }

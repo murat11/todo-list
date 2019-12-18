@@ -2,8 +2,8 @@
 
 namespace Test\Integration\Repository;
 
-use App\Domain\TodoList;
-use App\Domain\TodoListItem;
+use App\Domain\TodoList\TodoList;
+use App\Domain\TodoList\TodoListItem;
 use Doctrine\DBAL\FetchMode;
 use Test\Integration\ApplicationTestCase;
 

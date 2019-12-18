@@ -3,8 +3,8 @@
 namespace App\Infrastructure\Api;
 
 use App\Application\Validator\ValidationException;
-use App\Domain\Exception\TodoListItemNotFoundException;
-use App\Domain\Exception\TodoListNotFoundException;
+use App\Domain\TodoList\Exception\TodoListItemNotFoundException;
+use App\Domain\TodoList\Exception\TodoListNotFoundException;
 use App\Infrastructure\Api\Exceptions\BadRequestException;
 use App\Infrastructure\Api\Exceptions\NotFoundException;
 use App\Infrastructure\CommandBus\CommandBus;

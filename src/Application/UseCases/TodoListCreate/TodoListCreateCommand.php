@@ -2,7 +2,7 @@
 
 namespace App\Application\UseCases\TodoListCreate;
 
-use App\Domain\TodoList;
+use App\Domain\TodoList\TodoList;
 
 /**
  * Class TodoListCreateCommand

@@ -4,7 +4,7 @@ namespace App\Application\Notifications;
 
 use App\Domain\EventManager\DomainEventInterface;
 use App\Domain\EventManager\EventHandlerInterface;
-use App\Domain\Events\TodoListCreatedEvent;
+use App\Domain\TodoList\Events\TodoListCreatedEvent;
 
 class TodoListCreatedNotificationSender implements EventHandlerInterface
 {

@@ -2,24 +2,23 @@
 
 namespace App\Application\UseCases\TodoListChangeItemsStatus;
 
-use App\Application\Repository\TodoListRepositoryAwareInterface;
-use App\Application\Repository\TodoListRepositoryAwareTrait;
+use App\Domain\TodoList\TodoListManager\TodoListManagerAwareInterface;
+use App\Domain\TodoList\TodoListManager\TodoListManagerAwareTrait;
 
 /**
  * Class TodoListChangeItemsStatusCommandHandler
  */
-class TodoListChangeItemsStatusCommandHandler implements TodoListRepositoryAwareInterface
+class TodoListChangeItemsStatusCommandHandler implements TodoListManagerAwareInterface
 {
-    use TodoListRepositoryAwareTrait;
+    use TodoListManagerAwareTrait;
 
     /**
      * @param TodoListChangeItemsStatusCommand $command
      */
     public function handle(TodoListChangeItemsStatusCommand $command): void
     {
-        $todoList = $this->todoListRepository->findOneById($command->getListId());
+        $todoList = $this->todoListManager->findTodoListById($command->getListId());
         $todoList->applyNewStatusToAllItems($command->isCompleted());
-
-        $this->todoListRepository->save($todoList);
+        $this->todoListManager->updateTodoList($todoList);
     }
 }

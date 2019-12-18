@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Events;
+namespace App\Domain\TodoList\Events;
 
 use App\Domain\EventManager\DomainEventInterface;
-use App\Domain\TodoList;
+use App\Domain\TodoList\TodoList;
 
 class TodoListDeletedEvent implements DomainEventInterface
 {

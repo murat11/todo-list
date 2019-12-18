@@ -2,11 +2,11 @@
 
 namespace Test\Unit\Application\UseCases;
 
-use App\Application\Repository\TodoListRepositoryInterface;
 use App\Application\UseCases\TodoListCreateItem\TodoListCreateItemCommand;
 use App\Application\UseCases\TodoListCreateItem\TodoListCreateItemCommandHandler;
-use App\Domain\TodoList;
-use App\Domain\TodoListItem;
+use App\Domain\TodoList\TodoList;
+use App\Domain\TodoList\TodoListItem;
+use App\Domain\TodoList\TodoListManager\TodoListManager;
 use PHPUnit\Framework\TestCase;
 
 class TodoListCreateItemCommandHandlerTest extends TestCase
@@ -22,12 +22,12 @@ class TodoListCreateItemCommandHandlerTest extends TestCase
         $todoList = $this->createMock(TodoList::class);
         $todoList->expects($this->once())->method('addItem')->with($todoListItem);
 
-        $repository = $this->createMock(TodoListRepositoryInterface::class);
-        $repository->expects($this->once())->method('findOneById')->with('list-id')->willReturn($todoList);
-        $repository->expects($this->once())->method('save')->with($todoList);
+        $manager = $this->createMock(TodoListManager::class);
+        $manager->expects($this->once())->method('findTodoListById')->with('list-id')->willReturn($todoList);
+        $manager->expects($this->once())->method('updateTodoList')->with($todoList);
 
         $handler = new TodoListCreateItemCommandHandler();
-        $handler->setTodoListRepository($repository);
+        $handler->setTodoListManager($manager);
         $this->assertEquals($todoListItem, $handler->handle($command));
     }
 }

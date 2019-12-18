@@ -4,6 +4,8 @@ namespace Test\Integration\UseCases;
 
 use App\Application\UseCases\TodoListCreateItem\TodoListCreateItemCommand;
 use App\Application\UseCases\TodoListCreateItem\TodoListCreateItemCommandHandler;
+use App\Domain\TodoList\TodoListManager\TodoListManager;
+use App\Infrastructure\EventManager\EventManager;
 use Doctrine\DBAL\FetchMode;
 use Test\Integration\ApplicationTestCase;
 
@@ -20,7 +22,7 @@ class TodoListCreateItemCommandHandlerTest extends ApplicationTestCase
         );
 
         $handler = new TodoListCreateItemCommandHandler();
-        $handler->setTodoListRepository($this->repository);
+        $handler->setTodoListManager(new TodoListManager($this->repository, new EventManager()));
 
         $todoListItem = $handler->handle(
             new TodoListCreateItemCommand(
