@@ -1,25 +1,26 @@
 <?php declare(strict_types=1);
 
-namespace App\Application\Notifications;
+namespace App\Application\Domain\EventHandlers;
 
+use App\Application\Notifications\Notification;
+use App\Application\Notifications\NotificationSenderInterface;
 use App\Domain\EventManager\DomainEventInterface;
 use App\Domain\EventManager\EventHandlerInterface;
 use App\Domain\TodoList\Events\TodoListDeletedEvent;
 
-class TodoListDeletedNotificationSender implements EventHandlerInterface
+class TodoListDeletedEventHandler implements EventHandlerInterface
 {
-
     /**
      * @var NotificationSenderInterface
      */
-    private $notifier;
+    private $notificationSender;
 
     /**
-     * @param NotificationSenderInterface $notifier
+     * @param NotificationSenderInterface $notificationSender
      */
-    public function __construct(NotificationSenderInterface $notifier)
+    public function __construct(NotificationSenderInterface $notificationSender)
     {
-        $this->notifier = $notifier;
+        $this->notificationSender = $notificationSender;
     }
 
     /**
@@ -39,6 +40,6 @@ class TodoListDeletedNotificationSender implements EventHandlerInterface
                 'todo_list' => $todoList,
             ]
         );
-        $this->notifier->send($notification);
+        $this->notificationSender->send($notification);
     }
 }
