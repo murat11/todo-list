@@ -2,9 +2,6 @@
 
 Creation of a simple todo app (called Toodoo) that will help multiple users quickly collaborate on the same tasks.
 
-Take a look at the [online mind map](https://www.mindmeister.com/1157278790?t=7mJpbCxVIR) for further information on 
-the project functionality.
-
 This repository provides only the frontend functionality of the app, a RESTful API still needs to be created. 
 
 ## Missing Endpoints
