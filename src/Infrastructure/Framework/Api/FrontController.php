@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\Api;
+namespace App\Infrastructure\Framework\Api;
 
-use App\Infrastructure\Api\Exceptions\ApiException;
-use App\Infrastructure\Api\Exceptions\BadRequestException;
-use App\Infrastructure\Api\Exceptions\NotFoundException;
+use App\Infrastructure\Framework\Api\Exceptions\ApiException;
+use App\Infrastructure\Framework\Api\Exceptions\BadRequestException;
+use App\Infrastructure\Framework\Api\Exceptions\NotFoundException;
 use Throwable;
 
 class FrontController

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\Validator;
+namespace App\Infrastructure\Framework\Validator;
 
 use App\Application\Validator\ValidationResult;
 use App\Application\Validator\ValidatorInterface;

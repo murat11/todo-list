@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\Api\Exceptions;
+namespace App\Infrastructure\Framework\Api\Exceptions;
 
 use InvalidArgumentException;
 use Throwable;

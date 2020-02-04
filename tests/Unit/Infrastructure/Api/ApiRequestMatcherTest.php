@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Infrastructure\Api;
 
-use App\Infrastructure\Api\ApiRequest;
-use App\Infrastructure\Api\ApiRequestMatcher;
+use App\Infrastructure\Framework\Api\ApiRequest;
+use App\Infrastructure\Framework\Api\ApiRequestMatcher;
 use PHPUnit\Framework\TestCase;
 
 class ApiRequestMatcherTest extends TestCase

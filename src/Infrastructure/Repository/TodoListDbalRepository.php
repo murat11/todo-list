@@ -5,6 +5,7 @@ namespace App\Infrastructure\Repository;
 use App\Domain\RepositoryInterface;
 use App\Domain\TodoList\TodoList;
 use App\Domain\TodoList\TodoListItem;
+use App\Infrastructure\Framework\IdGenerator\IdGeneratorInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\Types\Types;

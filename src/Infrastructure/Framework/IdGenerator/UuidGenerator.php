@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\Repository\IdGenerator;
-
-use App\Infrastructure\Repository\IdGeneratorInterface;
+namespace App\Infrastructure\Framework\IdGenerator;
 
 class UuidGenerator implements IdGeneratorInterface
 {

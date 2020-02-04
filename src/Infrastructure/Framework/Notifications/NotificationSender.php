@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\Notifications;
+namespace App\Infrastructure\Framework\Notifications;
 
 use App\Application\Notifications\Notification;
 use App\Application\Notifications\NotificationSenderInterface;

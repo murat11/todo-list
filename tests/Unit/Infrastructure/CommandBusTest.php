@@ -4,8 +4,8 @@ namespace Test\Unit\Infrastructure;
 
 use App\Application\Validator\ValidationResult;
 use App\Application\Validator\ValidatorInterface;
-use App\Infrastructure\CommandBus\CommandBus;
-use App\Infrastructure\CommandBus\HandlerResolver;
+use App\Infrastructure\Framework\CommandBus\CommandBus;
+use App\Infrastructure\Framework\CommandBus\HandlerResolver;
 use PHPUnit\Framework\TestCase;
 
 

@@ -3,10 +3,10 @@
 namespace App\Infrastructure\Api\RequestHandlers;
 
 use App\Application\UseCases\TodoListReadItems\TodoListReadItemsCommand;
-use App\Infrastructure\Api\ApiRequest;
-use App\Infrastructure\Api\ApiRequestHandler;
-use App\Infrastructure\Api\ApiResponse;
-use App\Infrastructure\Api\Exceptions\NotFoundException;
+use App\Infrastructure\Framework\Api\ApiRequest;
+use App\Infrastructure\Framework\Api\ApiRequestHandler;
+use App\Infrastructure\Framework\Api\ApiResponse;
+use App\Infrastructure\Framework\Api\Exceptions\NotFoundException;
 use App\Domain\TodoList\Exception\TodoListNotFoundException as NotFoundRepositoryException;
 
 class GetTodoListItemsRequestHandler extends ApiRequestHandler

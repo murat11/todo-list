@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\CommandBus;
+namespace App\Infrastructure\Framework\CommandBus;
 
 use App\Application\Validator\ValidationException;
 use App\Application\Validator\ValidatorInterface;

@@ -3,9 +3,9 @@
 namespace App\Infrastructure\Api\RequestHandlers;
 
 use App\Application\UseCases\TodoListCreate\TodoListCreateCommand;
-use App\Infrastructure\Api\ApiRequest;
-use App\Infrastructure\Api\ApiRequestHandler;
-use App\Infrastructure\Api\ApiResponse;
+use App\Infrastructure\Framework\Api\ApiRequest;
+use App\Infrastructure\Framework\Api\ApiRequestHandler;
+use App\Infrastructure\Framework\Api\ApiResponse;
 
 class CreateTodoListRequestHandler extends ApiRequestHandler
 {
