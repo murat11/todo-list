@@ -4,7 +4,7 @@ namespace Test\Unit\Infrastructure\Validator;
 
 use App\Application\Validator\ValidationResult;
 use App\Application\Validator\ValidatorInterface;
-use App\Infrastructure\Validator\ChainedValidator;
+use App\Infrastructure\Framework\Validator\ChainedValidator;
 use PHPUnit\Framework\TestCase;
 
 class ChainedValidatorTest extends TestCase

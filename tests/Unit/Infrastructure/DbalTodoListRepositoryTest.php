@@ -5,7 +5,7 @@ namespace Test\Unit\Infrastructure;
 use App\Domain\TodoList\TodoList;
 use App\Domain\TodoList\TodoListItem;
 use App\Infrastructure\Repository\TodoListDbalRepository;
-use App\Infrastructure\Repository\IdGeneratorInterface;
+use App\Infrastructure\Framework\IdGenerator\IdGeneratorInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\ResultStatement;
 use Doctrine\DBAL\Types\Types;

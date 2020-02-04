@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\Api;
+namespace App\Infrastructure\Framework\Api;
 
 use App\Application\Validator\ValidationException;
 use App\Domain\TodoList\Exception\TodoListItemNotFoundException;
 use App\Domain\TodoList\Exception\TodoListNotFoundException;
-use App\Infrastructure\Api\Exceptions\BadRequestException;
-use App\Infrastructure\Api\Exceptions\NotFoundException;
-use App\Infrastructure\CommandBus\CommandBus;
-use App\Infrastructure\CommandBus\CommandBusAwareInterface;
-use App\Infrastructure\Serializer\SerializerAwareInterface;
-use App\Infrastructure\Serializer\SerializerInterface;
+use App\Infrastructure\Framework\Api\Exceptions\BadRequestException;
+use App\Infrastructure\Framework\Api\Exceptions\NotFoundException;
+use App\Infrastructure\Framework\CommandBus\CommandBus;
+use App\Infrastructure\Framework\CommandBus\CommandBusAwareInterface;
+use App\Infrastructure\Framework\Serializer\SerializerAwareInterface;
+use App\Infrastructure\Framework\Serializer\SerializerInterface;
 
 abstract class ApiRequestHandler implements CommandBusAwareInterface, SerializerAwareInterface
 {

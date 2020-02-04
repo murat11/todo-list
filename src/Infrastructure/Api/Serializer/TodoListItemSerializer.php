@@ -3,7 +3,7 @@
 namespace App\Infrastructure\Api\Serializer;
 
 use App\Domain\TodoList\TodoListItem;
-use App\Infrastructure\Serializer\SerializerInterface;
+use App\Infrastructure\Framework\Serializer\SerializerInterface;
 
 class TodoListItemSerializer implements SerializerInterface
 {

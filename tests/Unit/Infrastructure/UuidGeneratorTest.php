@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Infrastructure;
 
-use App\Infrastructure\Repository\IdGenerator\UuidGenerator;
+use App\Infrastructure\Framework\IdGenerator\UuidGenerator;
 use PHPUnit\Framework\TestCase;
 
 class UuidGeneratorTest extends TestCase

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\Api;
+namespace App\Infrastructure\Framework\Api;
 
-use App\Infrastructure\CommandBus\CommandBus;
-use App\Infrastructure\CommandBus\CommandBusAwareInterface;
-use App\Infrastructure\Serializer\SerializerAwareInterface;
-use App\Infrastructure\Serializer\SerializerInterface;
+use App\Infrastructure\Framework\CommandBus\CommandBus;
+use App\Infrastructure\Framework\CommandBus\CommandBusAwareInterface;
+use App\Infrastructure\Framework\Serializer\SerializerAwareInterface;
+use App\Infrastructure\Framework\Serializer\SerializerInterface;
 
 class RequestHandlerFactory
 {

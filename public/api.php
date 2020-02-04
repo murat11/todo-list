@@ -1,8 +1,8 @@
 <?php
 
-use App\Infrastructure\Api\ApiRequest;
-use App\Infrastructure\Api\ApiRequestMatcher;
-use App\Infrastructure\Api\FrontController;
+use App\Infrastructure\Framework\Api\ApiRequest;
+use App\Infrastructure\Framework\Api\ApiRequestMatcher;
+use App\Infrastructure\Framework\Api\FrontController;
 
 require '../vendor/autoload.php';
 require '../src/assemble.php';
