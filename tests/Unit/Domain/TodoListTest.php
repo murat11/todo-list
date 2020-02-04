@@ -90,7 +90,7 @@ class TodoListTest extends TestCase
         $this->assertCount(3, $todoList->getItems());
         $todoList->deleteCompletedItems();
         $this->assertCount(1, $todoList->getItems());
-        $this->assertEquals($item2, array_shift($todoList->getItems()));
-
+        $items = $todoList->getItems();
+        $this->assertEquals($item2, array_shift($items));
     }
 }
