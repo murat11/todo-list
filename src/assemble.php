@@ -31,7 +31,7 @@ $twig = new Twig(
     ['cache' => false]
 );
 
-$frontendUrlBuilder = new UrlBuilder('http://localhost:8080');
+$frontendUrlBuilder = new UrlBuilder(getenv('APP_FRONTEND_URL'));
 $twig->addFunction(
     new TwigFunction(
         'buildFrontendUrl',
@@ -43,11 +43,11 @@ $twig->addFunction(
 
 $notificationSender = new NotificationSender(
     [
-        'host' => 'smtp.sendgrid.net',
-        'port' => 25,
-        'username' => 'apikey',
-        'password' => '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',
-        'fromEmail' => 'murat@narsana.ru',
+        'host' => getenv('NOTIFICATION_SMTP_HOST'),
+        'port' => getenv('NOTIFICATION_SMTP_PORT'),
+        'username' => getenv('NOTIFICATION_SMTP_USERNAME'),
+        'password' => getenv('NOTIFICATION_SMTP_PASSWORD'),
+        'fromEmail' => getenv('NOTIFICATION_FROM_ADDRESS'),
     ],
     $twig
 );
@@ -60,7 +60,7 @@ $commandBus = new CommandBus(
     new HandlerResolver(
         new TodoListManager(
             new TodoListDbalRepository(
-                DriverManager::getConnection(['url' => 'mysql://root@mysql-dev:3306/app_dev']),
+                DriverManager::getConnection(['url' => getenv('DB_URL')]),
                 new UuidGenerator()
             ),
             $eventManager
