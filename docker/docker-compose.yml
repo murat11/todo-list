@@ -36,6 +36,8 @@ services:
     working_dir: "/srv/app"
     environment:
       PHP_IDE_CONFIG: "serverName=APP"
+    env_file:
+      - ../.env
 
   mysql-dev:
     build:
