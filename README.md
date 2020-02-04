@@ -108,3 +108,12 @@ DELETE - `api.php/lists/:list-id/todos?completed`
 ##### PAYLOAD
 
 *None* 
+
+## How to run
+It's completely runnable with docker and make
+How to run:
+ - git clone 
+ - make build
+ - make unit-test - to run unit-tests
+ - make start (Use http://localhost:8080/index.html to open FE in browser, Email delivery should also work. I checked it many times)
+ - make stop  - after you finished testing 
