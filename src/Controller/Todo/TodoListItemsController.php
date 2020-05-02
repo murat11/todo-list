@@ -6,7 +6,7 @@ use App\Application\UseCases\TodoList\GetListItemsQuery;
 use App\Domain\TodoList\TodoListItem;
 use App\Domain\TodoList\TodoListManager\TodoListManager;
 
-class ListItemsController
+class TodoListItemsController
 {
     /**
      * @param GetListItemsQuery $query

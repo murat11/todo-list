@@ -2,22 +2,22 @@
 
 namespace App\Infrastructure\ParamConverter;
 
-use App\Application\UseCases\TodoListReadItems\TodoListReadItemsCommand;
+use App\Application\UseCases\TodoList\GetListItemsQuery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class GetListTodosCommandConverter implements ParamConverterInterface
+class GetTodoListItemsQueryParamConverter implements ParamConverterInterface
 {
 
     public function apply(Request $request, ParamConverter $configuration)
     {
-        $request->attributes->set($configuration->getName(), new TodoListReadItemsCommand($request->get('listId')));
+        $request->attributes->set($configuration->getName(), new GetListItemsQuery($request->get('listId')));
     }
 
     public function supports(ParamConverter $configuration)
     {
-        if ($configuration->getClass() !== TodoListReadItemsCommand::class) {
+        if ($configuration->getClass() !== GetListItemsQuery::class) {
             return false;
         }
 
