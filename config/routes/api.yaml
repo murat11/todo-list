@@ -1,0 +1,5 @@
+get-list-todos:
+  path:       /lists/{listId}/todos
+  controller: App\Application\UseCases\TodoListReadItems\TodoListReadItemsCommandHandler::handle
+
+
