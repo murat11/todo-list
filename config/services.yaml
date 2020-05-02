@@ -31,4 +31,11 @@ services:
 
     App\Infrastructure\Repository\TodoListDbalRepository:
         arguments:
-            - '@db_connection'
+              - '@db_connection'
+
+    App\Infrastructure\EventDispatcher\SerializeResponseListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.view }
+
+    Symfony\Component\Serializer\Normalizer\PropertyNormalizer:
+        tags: [serializer.normalizer]
