@@ -2,13 +2,14 @@
 
 namespace App\Application\UseCases\TodoListCreate;
 
+use App\Application\UseCases\TodoList\CreateListCommand;
 use App\Application\Validator\ValidationResult;
 use App\Application\Validator\ValidatorInterface;
 
 class TodoListCreateCommandValidator implements ValidatorInterface
 {
     /**
-     * @param TodoListCreateCommand $data
+     * @param CreateListCommand $data
      *
      * @return ValidationResult
      */
@@ -30,14 +31,14 @@ class TodoListCreateCommandValidator implements ValidatorInterface
      */
     public function canValidate($data): bool
     {
-        return $data instanceof TodoListCreateCommand;
+        return $data instanceof CreateListCommand;
     }
 
     /**
-     * @param TodoListCreateCommand $data
+     * @param CreateListCommand $data
      * @param ValidationResult $validationResult
      */
-    private function validateName(TodoListCreateCommand $data, ValidationResult $validationResult): void
+    private function validateName(CreateListCommand $data, ValidationResult $validationResult): void
     {
         $name = $data->getName();
         if (empty($name)) {
@@ -47,10 +48,10 @@ class TodoListCreateCommandValidator implements ValidatorInterface
     }
 
     /**
-     * @param TodoListCreateCommand $data
+     * @param CreateListCommand $data
      * @param ValidationResult $validationResult
      */
-    private function validateParticipantEmails(TodoListCreateCommand $data, ValidationResult $validationResult): void
+    private function validateParticipantEmails(CreateListCommand $data, ValidationResult $validationResult): void
     {
         $emails = $data->getParticipantEmails();
         if (empty($emails)) {

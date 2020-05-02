@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Api\RequestHandlers;
 
-use App\Application\UseCases\TodoListReadItems\TodoListReadItemsCommand;
+use App\Application\UseCases\TodoList\GetListItemsQuery;
 use App\Infrastructure\Framework\Api\ApiRequest;
 use App\Infrastructure\Framework\Api\ApiRequestHandler;
 use App\Infrastructure\Framework\Api\ApiResponse;
@@ -19,7 +19,7 @@ class GetTodoListItemsRequestHandler extends ApiRequestHandler
     function handle(ApiRequest $request): ApiResponse
     {
         $arguments = $request->getArguments();
-        $command = new TodoListReadItemsCommand($arguments['list-id']);
+        $command = new GetListItemsQuery($arguments['list-id']);
 
         try {
             $result = $this->commandBus->handle($command);

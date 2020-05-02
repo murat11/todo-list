@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Application\UseCases\TodoListCreate;
+namespace App\Application\UseCases\TodoList;
 
 use App\Domain\TodoList\TodoList;
 
 /**
  * Class TodoListCreateCommand
  */
-class TodoListCreateCommand
+class CreateListCommand
 {
     /**
      * @var string

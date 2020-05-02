@@ -1,5 +1,10 @@
-get-list-todos:
-  path:       /lists/{listId}/todos
-  controller: App\Controller\Todo\ListItemsController::getListItems
+create_todo-list:
+  path:       /lists
+  controller: App\Controller\Todo\TodoListController::createList
+  methods: POST
 
+get_todo-list_items:
+  path:       /lists/{listId}/todos
+  controller: App\Controller\Todo\TodoListItemsController::getListItems
+  methods: GET
 
