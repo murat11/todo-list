@@ -5,6 +5,7 @@ namespace App\Controller\Todo;
 use App\Application\UseCases\TodoList\AddListItemCommand;
 use App\Application\UseCases\TodoList\GetListItemsQuery;
 use App\Application\UseCases\TodoList\UpdateListItemCommand;
+use App\Application\UseCases\TodoList\DeleteListItemCommand;
 use App\Domain\TodoList\TodoListItem;
 use App\Domain\TodoList\TodoListManager\TodoListManager;
 
@@ -53,5 +54,17 @@ class TodoListItemsController
         $todoListManager->updateTodoList($todoList);
 
         return $todoListItem;
+    }
+
+    /**
+     * @param DeleteListItemCommand $command
+     * @param TodoListManager $todoListManager
+     */
+    public function deleteListItem(DeleteListItemCommand $command, TodoListManager $todoListManager): void
+    {
+        $todoList = $todoListManager->findTodoListById($command->getListId());
+        $todoList->deleteItemById($command->getListItemId());
+
+        $todoListManager->updateTodoList($todoList);
     }
 }

@@ -2,23 +2,17 @@
 
 namespace App\Infrastructure\ParamConverter;
 
-use App\Application\UseCases\TodoList\UpdateListItemCommand;
+use App\Application\UseCases\TodoList\DeleteListItemCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class UpdateTodoListItemCommandParamConverter implements ParamConverterInterface
+class DeleteTodoListItemCommandParamConverter implements ParamConverterInterface
 {
 
     public function apply(Request $request, ParamConverter $configuration)
     {
-        $requestParams = json_decode($request->getContent(), true);
-        $command = new UpdateListItemCommand(
-            $request->get('listId'),
-            $request->get('listItemId'),
-            $requestParams['title'] ?? '',
-            $requestParams['completed'] ?? false
-        );
+        $command = new DeleteListItemCommand($request->get('listId'), $request->get('listItemId'));
         $request->attributes->set($configuration->getName(), $command);
 
         return true;
@@ -26,7 +20,7 @@ class UpdateTodoListItemCommandParamConverter implements ParamConverterInterface
 
     public function supports(ParamConverter $configuration)
     {
-        if ($configuration->getClass() !== UpdateListItemCommand::class) {
+        if ($configuration->getClass() !== DeleteListItemCommand::class) {
             return false;
         }
 
