@@ -12,3 +12,9 @@ add_todo-list_item:
   path: /lists/{listId}/todos
   controller: App\Controller\Todo\TodoListItemsController::addListItem
   methods: POST
+
+
+update_todo-list_item:
+  path: /lists/{listId}/todos/{listItemId}
+  controller: App\Controller\Todo\TodoListItemsController::updateListItem
+  methods: POST|PUT

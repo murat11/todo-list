@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\Application\UseCases\TodoListItemUpdate;
+namespace App\Application\UseCases\TodoList;
 
 /**
  * Class TodoListItemUpdateCommand
  */
-class TodoListItemUpdateCommand
+class UpdateListItemCommand
 {
     /**
      * @var string

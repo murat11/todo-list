@@ -4,6 +4,7 @@ namespace App\Controller\Todo;
 
 use App\Application\UseCases\TodoList\AddListItemCommand;
 use App\Application\UseCases\TodoList\GetListItemsQuery;
+use App\Application\UseCases\TodoList\UpdateListItemCommand;
 use App\Domain\TodoList\TodoListItem;
 use App\Domain\TodoList\TodoListManager\TodoListManager;
 
@@ -35,4 +36,23 @@ class TodoListItemsController
 
         return $todoListItem;
     }
+
+    /**
+     * @param UpdateListItemCommand $command
+     * @param TodoListManager $todoListManager
+     *
+     * @return TodoListItem
+     */
+    public function updateListItem(UpdateListItemCommand $command, TodoListManager $todoListManager): TodoListItem
+    {
+        $todoList = $todoListManager->findTodoListById($command->getListId());
+        $todoListItem = $todoList->getItemById($command->getListItemId());
+        $todoListItem->setTitle($command->getTitle());
+        $todoListItem->setCompleted($command->isCompleted());
+
+        $todoListManager->updateTodoList($todoList);
+
+        return $todoListItem;
+    }
+
 }
