@@ -8,3 +8,7 @@ get_todo-list_items:
   controller: App\Controller\Todo\TodoListItemsController::getListItems
   methods: GET
 
+add_todo-list_item:
+  path: /lists/{listId}/todos
+  controller: App\Controller\Todo\TodoListItemsController::addListItem
+  methods: POST

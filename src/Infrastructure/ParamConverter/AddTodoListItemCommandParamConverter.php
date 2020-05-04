@@ -2,20 +2,21 @@
 
 namespace App\Infrastructure\ParamConverter;
 
-use App\Application\UseCases\TodoList\CreateListCommand;
+use App\Application\UseCases\TodoList\AddListItemCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class CreateTodoListCommandParamConverter implements ParamConverterInterface
+class AddTodoListItemCommandParamConverter implements ParamConverterInterface
 {
 
     public function apply(Request $request, ParamConverter $configuration)
     {
         $requestParams = json_decode($request->getContent(), true);
-        $command = new CreateListCommand(
-            $requestParams['name'] ?? '',
-                $requestParams['participants'] ?? []
+        $command = new AddListItemCommand(
+            $request->get('listId'),
+            $requestParams['title'] ?? '',
+            $requestParams['completed'] ?? false
         );
         $request->attributes->set($configuration->getName(), $command);
 
@@ -24,7 +25,7 @@ class CreateTodoListCommandParamConverter implements ParamConverterInterface
 
     public function supports(ParamConverter $configuration)
     {
-        if ($configuration->getClass() !== CreateListCommand::class) {
+        if ($configuration->getClass() !== AddListItemCommand::class) {
             return false;
         }
 

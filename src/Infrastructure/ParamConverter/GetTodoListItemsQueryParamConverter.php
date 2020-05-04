@@ -13,6 +13,8 @@ class GetTodoListItemsQueryParamConverter implements ParamConverterInterface
     public function apply(Request $request, ParamConverter $configuration)
     {
         $request->attributes->set($configuration->getName(), new GetListItemsQuery($request->get('listId')));
+
+        return true;
     }
 
     public function supports(ParamConverter $configuration)
