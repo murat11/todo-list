@@ -8,7 +8,7 @@ $(function() {
 	var onTodoListFormSubmit = function(event) {
 		event.preventDefault();
 
-		var url = 'api.php/lists';
+		var url = 'api/lists';
 		var data = serializeForm();
 
 		$.ajax({

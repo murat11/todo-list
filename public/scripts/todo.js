@@ -52,7 +52,7 @@ $(function() {
 				return;
 			}
 			
-			var url = 'api.php/lists/' + list + '/todos';
+			var url = 'api/lists/' + list + '/todos';
 			
 			$.ajax({
 				method: 'GET',
@@ -111,7 +111,7 @@ $(function() {
 		toggleAll: function(e) {
 			var list = util.getParam(location.search).list;
 			var isChecked = $(e.target).prop('checked');
-			var url = 'api.php/lists/' + list + '/todos';
+			var url = 'api/lists/' + list + '/todos';
 			var data = {
 				completed: isChecked
 			};
@@ -156,7 +156,7 @@ $(function() {
 		},
 		destroyCompleted: function() {
 			var list = util.getParam(location.search).list;
-			var url = 'api.php/lists/' + list + '/todos?completed';
+			var url = 'api/lists/' + list + '/todos?completed';
 			$.ajax({
 				method: 'DELETE',
 				url: url,
@@ -192,7 +192,7 @@ $(function() {
 			}
 			
 			var list = util.getParam(location.search).list;
-			var url = 'api.php/lists/' + list + '/todos';
+			var url = 'api/lists/' + list + '/todos';
 			var data = {
                 //id: util.uuid(),
 				title: val,
@@ -222,7 +222,7 @@ $(function() {
 			var $el = $(e.target);
 			var $listItem = $el.closest('li');
 			var list = util.getParam(location.search).list;
-			var url = 'api.php/lists/' + list + '/todos/' + $listItem.data('id');
+			var url = 'api/lists/' + list + '/todos/' + $listItem.data('id');
 			var data = {
 				id: $listItem.data('id'),
 				title: $listItem.find('input:text').val(),
@@ -275,7 +275,7 @@ $(function() {
 			} else {
 				var list = util.getParam(location.search).list;
 				var $listItem = $el.closest('li');
-				var url = 'api.php/lists/' + list + '/todos/' + $listItem.data('id');
+				var url = 'api/lists/' + list + '/todos/' + $listItem.data('id');
 				var data = {
 					id: $listItem.data('id'),
 					title: val,
@@ -301,7 +301,7 @@ $(function() {
 		destroy: function(e) {
 			var $listItem = $(e.target).closest('li');
 			var list = util.getParam(location.search).list;
-			var url = 'api.php/lists/' + list + '/todos/' + $listItem.data('id');
+			var url = 'api/lists/' + list + '/todos/' + $listItem.data('id');
 			
 			$.ajax({
 				method: 'DELETE',
@@ -324,7 +324,7 @@ $(function() {
 			
 			var list = util.getParam(location.search).list;
 			
-			var url = 'api.php/lists/' + list;
+			var url = 'api/lists/' + list;
 			
 			$.ajax({
 				method: 'DELETE',
