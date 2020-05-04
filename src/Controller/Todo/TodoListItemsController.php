@@ -54,5 +54,4 @@ class TodoListItemsController
 
         return $todoListItem;
     }
-
 }
